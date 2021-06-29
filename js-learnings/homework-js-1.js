@@ -18,29 +18,18 @@ const solution2 = (num) => {
     return res == num
 }
 
-const mask = (item, index, length) => {
-    return length - 4 <= index ? item : "#"
-}
-
 const solution3 = (string) => {
     let array = string.toString().split("")
     let len = array.length
     let res = ""
     for (let i = 0; i < len; i++) {
-        res += mask(array[i], i, len)
+        res += len - 4 <= i ? array[i] : "#"
     }
     return res
 }
 
 const solution4 = (sentence) => {
-    let array = sentence.toLowerCase().replace(/[0-9.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split("")
-    let res = []
-    array.forEach(element => {
-        if (!(res.includes(element))) {
-            res.push(element)
-        }
-    });
-    return res.length > 26
+    return Array.from(new Set(sentence.toLowerCase().replace(/[0-9\s.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(""))).length == 26
 }
 
 const solution5 = (string) => {
@@ -61,5 +50,6 @@ const solution5 = (string) => {
 }
 
 
-//console.log(solution5("ABBA"))
+
+console.log(solution5("abcde"))
 
