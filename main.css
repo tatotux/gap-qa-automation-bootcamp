@@ -1,18 +1,25 @@
-h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
+
+h1 {
+  font-family:sans-serif;
+  font-size: 3em;    
+  font-weight: bold;
 }
-#test1 {
-  margin: 100;
+.applyBackGround{
+  background-color: #79EF4D;
+  border-radius: 12px;
+  border: 0ch;
+  margin: 30px;
+  cursor:pointer;
 }
-.test3 {
-  margin: 200px;
+.cancelBackGround{
+  background-color:gray;
+  border-radius: 12px;
+  border: 0ch;
+  margin: 30px;
+  cursor:pointer;
 }
-.test2{
-  margin: 300px;
+h3 {
+color: white;
+font-size: 25px;  
+margin: 25px;
 }
