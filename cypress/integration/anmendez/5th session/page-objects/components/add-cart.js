@@ -3,14 +3,17 @@ export class AddToCart {
     getUrl : () => cy.url(),
     getTitle: () => cy.title()
     }
-};
-elements = {
-    getAddCart: () => cy.contains('Add to cart'),
-    getViewCart: () => cy.contains('View cart')
-};
 
-addProduct(){
-    this.elements.getAddCart().click();
+    elements = {
+        getAddCart: () => cy.contains('Add to cart'),
+        getViewCart: () => cy.contains('View cart')
+    };
+
+    getAddCart(){
+        this.elements.getAddCart().click();
+    }
+    getViewCart(){
+        this.elements.getViewCart().click();
+    }
 }
-
-export const AddToCart = new AddToCart();
+export const CartComponent = new AddToCart();
