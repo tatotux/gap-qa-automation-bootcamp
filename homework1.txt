@@ -1,0 +1,79 @@
+Homework 1
+
+Table Example:
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<h1 style="text-align:center">Bootcamp Table Example</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th style="text-align:center">Name</th>
+    <th style="text-align:left">Last Name</th>
+  </tr>
+  <tr>
+    <td>Number 1</td>
+    <td>Eduardo</td>
+    <td>Uribe</td>
+  </tr>
+  <tr>
+    <td>Number 2</td>
+    <td>Edlly</td>
+    <td>Gomez</td>
+  </tr>
+  <tr>
+    <td>Number 3</td>
+    <td>Marco</td>
+    <td>Sanabria</td>
+  </tr>
+  <tr>
+    <td>Number 4</td>
+    <td>Antony</td>
+    <td>Fuentes</td>
+  </tr>
+</table>
+
+</body>
+</html>
+
+
+Buttons Example:
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .button {
+    border-radius: 8px;
+    border: none;
+    
+    padding: 25px 40px 25px 40px;
+    text-align: center;
+    display: inline-block;
+    color: white; /* font color */
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px 35px 0px 0px; /* margin: top right bottom left */
+    cursor: pointer; /* hand icon */
+	}
+  .greenbutton {background-color: #00e038; /* Green */}
+  .graybutton {background-color: #5d615e; /* Gray */}
+    
+</style>
+</head>
+
+<body>
+<h1>Bootcamp Buttons Example</h1>
+
+<div>
+	<button class="button greenbutton">Apply here</button>
+	<button class="button graybutton">Cancel</button>
+</div>
+
+</body>
+</html>
