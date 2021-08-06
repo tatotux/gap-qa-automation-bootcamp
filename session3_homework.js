@@ -1,5 +1,5 @@
 
-// PROBLEM 1 - SOLUTIONS
+// PROBLEM 1
 multiples_3_5(1);
 
 function multiples_3_5(number){
@@ -14,6 +14,22 @@ function multiples_3_5(number){
     }
     return console.log(suma)
 }
+
+
+// PROBLEM 2
+narcissisticNumbers(153)
+
+function narcissisticNumbers(number){
+    let lengthNumber = `${number}`.length;
+    let NewSum= 0;
+        
+    String(number).split("").map((num)=>{
+        NewSum += Math.pow(num,lengthNumber)  
+    })
+
+    if(number === NewSum) return console.log('true'); else {console.log('false')}
+}
+
 
 
    
