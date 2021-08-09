@@ -64,7 +64,7 @@ maskify("Nananananananananananananananana Batman!") ==> "#######################
 */
 function maskify(string) {
     if (string.length <= 4)
-        console.log(string)
+        return string
     else {
         const unmasked = string.substr(string.length - 4)
         const maskChar = "#"
