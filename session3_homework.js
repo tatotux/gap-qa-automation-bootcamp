@@ -1,4 +1,4 @@
-/*
+
 // PROBLEM 1
 multiples_3_5(10);
 
@@ -38,7 +38,7 @@ function maskedValue(UnMaskedValue) {
     const characters = UnMaskedValue.slice(-2)
     return console.log(characters.padStart(UnMaskedValue.length, '#'));
 }
-*/
+
 
 //PROBLEM 4
 function isPangram (text){
