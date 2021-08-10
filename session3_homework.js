@@ -1,4 +1,4 @@
-
+/*
 // PROBLEM 1
 multiples_3_5(10);
 
@@ -38,13 +38,19 @@ function maskedValue(UnMaskedValue) {
     const characters = UnMaskedValue.slice(-2)
     return console.log(characters.padStart(UnMaskedValue.length, '#'));
 }
+*/
 
+//PROBLEM 4
+function isPangram (text){
+    let alphabet2 = 'abcdefghijklmnopqrstuvwxyz'
+    let noDuplicates = [...new Set(text.toLowerCase().replace(/[^A-Z0-9]/ig, ""))]
+    let isPangramText = true
 
+    for(let i = 0;i<=alphabet2.length-1;i++){           
+        if (!noDuplicates.includes(alphabet2[i])) isPangramText = false           
+    }
+    
+    return console.log(isPangramText)
+}
 
-
-
-
-
-   
-
-
+isPangram('The quick brown fox jumps over the lazy dog')
