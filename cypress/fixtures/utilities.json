@@ -1,0 +1,73 @@
+{
+    "product":
+    {
+        "name": "One Plus 8T",
+        "type": "simple",
+        "regular_price": "549.99",
+        "description": "Lunar Silver, 5G Unlocked Android Smartphone US Version. 15 minutes for a full day of energy - Eliminate charging anxiety with Warp Charge 65. All it takes is a short charge to get you ready for your day",
+        "short_description": "This product has been added for testing purposes ~Andrea",
+        "categories": [
+            {
+                "id": 9
+            },
+            {
+                "id": 14
+            }
+        ] 
+    },
+    "coupon":{
+        "code": "10off_andrea",
+        "discount_type": "percent",
+        "amount": "10",
+        "individual_use": false,
+        "exclude_sale_items": true,
+        "minimum_amount": "100.00"
+    },
+    "order":[
+        {
+            "payment_method": "bacs",
+            "payment_method_title": "Direct Bank Transfer",
+            "set_paid": true,
+            "billing": {
+            "first_name": "Andrea",
+            "last_name": "Mendez",
+            "address_1": "Aguas Zarcas",
+            "address_2": "",
+            "city": "San Carlos",
+            "state": "Alajuela",
+            "postcode": "21004",
+            "country": "CR ",
+            "email": "andrea97ma@gmail.com",
+            "phone": "(506) 86868686"
+        },
+            "shipping": {
+            "first_name": "Andrea",
+            "last_name": "Mendez",
+            "address_1": "Aguas Zarcas",
+            "address_2": "",
+            "city": "San Carlos",
+            "state": "Alajuela",
+            "postcode": "21004",
+            "country": "CR"
+        },
+            "line_items": [
+                {
+                "product_id": 294,
+                "quantity": 1
+                }
+            ],
+            "coupon_lines": [
+                {
+                    "code" : "10off_andrea"
+                }
+            ],
+            "shipping_lines": [
+                {
+                "method_id": "flat_rate",
+                "method_title": "Flat Rate",
+                "total": "10.00"
+                }
+            ]
+        }
+    ]
+}

@@ -1,3 +1,11 @@
 {
-    "baseUrl":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/"
+    "baseUrl":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/",
+    "env":{
+        "create_product_request":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/wp-json/wc/v3/products",
+        "create_coupon_request":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/wp-json/wc/v3/coupons",
+        "create_order_request":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/wp-json/wc/v3/orders",
+        "delete_product_request":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/wp-json/wc/v3/products/294?force=true",
+        "delete_coupon_request":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/wp-json/wc/v3/coupons/298?force=true",
+        "delete_order_request":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/wp-json/wc/v3/orders/297?force=true"
+    }
 }
