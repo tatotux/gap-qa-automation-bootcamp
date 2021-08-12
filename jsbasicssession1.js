@@ -35,19 +35,65 @@ function sumMultiples(number){
 // Error checking for text strings or other invalid inputs is not required, only valid positive non-zero 
 // integers will be passed into the function.
 
-function narcissistic (){
-  let givenNumber = [1,6,5,2];
-  let exponent = givenNumber.length;
+function narcissistic (number){
+  let givenNumber = Array.from(number.toString());
   let total = 0;
-
-  console.log(exponent);
+  const exponent = givenNumber.length;
+  
   for(let i=0; i<exponent; i++){
     total+= Math.pow(givenNumber[i],exponent);
     }
 
-  return total;
-
-
+  return (total == number);
 }
 
-console.log(narcissistic());
+function isNarcissistic(number){
+  console.log(narcissistic(153));
+}
+
+// isNarcissistic(1652);
+
+// Problem 3
+// Usually when you buy something, you're asked whether your credit card number, phone number or answer to your 
+// most secret question is still correct. However, since someone could look over your shoulder, 
+// you don't want that shown on your screen. Instead, we mask it.
+// Your task is to write a function maskify, which changes all but the last four characters into '#'.
+// Examples
+// maskify("4556364607935616")	==> "############5616"
+// maskify("64607935616")      		==>      "#######5616"
+// maskify("1") 				==>                "1"
+// maskify( "") 				==>                 ""
+
+// // "What was the name of your first pet?"
+// maskify("Skippy")			==> "##ippy"
+// maskify("Nananananananananananananananana Batman!") ==> "####################################man!"
+
+function maskify(sentece){
+  let phrase = Array.from(sentece);
+  
+  console.log(phrase.splice(0,phrase.length-4));
+}
+maskify('hello world');
+
+// Problem 4
+// A pangram is a sentence that contains every single letter of the alphabet at least once. 
+// For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, 
+// because it uses the letters A-Z at least once (case is irrelevant).
+// Given a string, detect whether or not it is a pangram. Return True if it is, False 
+// if not. Ignore numbers and punctuation.
+
+
+// Problem 5
+// Count the number of Duplicates
+// Write a function that will return the count of distinct case-insensitive alphabetic characters 
+// and numeric digits that occur more than once in the input string. 
+// The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+
+// Example
+// "abcde" -> 0 		# no characters repeats more than once
+// "aabbcde" -> 2 	# 'a' and 'b'
+// "aabBcde" -> 2 	# 'a' occurs twice and 'b' twice (`b` and `B`)
+// "indivisibility" -> 1 	# 'i' occurs six times
+// "Indivisibilities" -> 2 	# 'i' occurs seven times and 's' occurs twice
+// "aA11" -> 2 		# 'a' and '1'
+// "ABBA" -> 2 		# 'A' and 'B' each occur twice
