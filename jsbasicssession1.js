@@ -71,8 +71,8 @@ isNarcissistic(1652);
 // maskify("Skippy")			==> "##ippy"
 // maskify("Nananananananananananananananana Batman!") ==> "####################################man!"
 
-function maskify(sentece){
-  let phrase = Array.from(sentece);
+function maskify(sentence){
+  let phrase = Array.from(sentence);
   let visibleCharacters = 4
   
   if (phrase.length > visibleCharacters){
@@ -96,6 +96,30 @@ maskify('Anaki & Padme');
 // Given a string, detect whether or not it is a pangram. Return True if it is, False 
 // if not. Ignore numbers and punctuation.
 
+function pangram(sentence){
+ //cada una del alfababeto en la oracion
+
+  let phrase = Array.from(sentence);
+  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+  let isInAlphabet = true;
+
+ 
+  for(let i=0; i<alphabet.length; i++){
+     if (! phrase.includes(alphabet[i])){
+      isInAlphabet = false;
+       break;}
+    }
+
+  return isInAlphabet;
+
+}
+
+function isPangram(sentence){
+  console.log(pangram(sentence)? `"${sentence}" is a pangram sentence`:`"${sentence}" is NOT a pangram sentence`)
+}
+
+isPangram('The quick brown fox jumps over the lazy dog');
+isPangram('The quick brown fox jumps over the lazy');
 
 // Problem 5
 // Count the number of Duplicates
