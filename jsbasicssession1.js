@@ -2,7 +2,8 @@
 // If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. 
 // The sum of these multiples is 23.
 // Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in.
-// Note: If the number is a multiple of both 3 and 5, only count it once. Also, if a number is negative, return 0(for languages that do have them)
+// Note: If the number is a multiple of both 3 and 5, only count it once. Also, if a number is negative, 
+// return 0(for languages that do have them)
 
 function sumMultiples(number){
 
@@ -14,11 +15,12 @@ function sumMultiples(number){
   }
 
   function printSum(number){
-    number>0 ? console.log(sumMultiples(number)) : console.log('Negative value');
+    number>0 ? console.log(`The sum of the multiples of 3 or 5 for ${number} is`, sumMultiples(number)) 
+             : console.log(`${number} is a negative value`);
     return 0; //not sure about returning 0 ...
   }
 
-  //printSum(10);
+  printSum(10);
 
   
 // Problem 2
@@ -48,10 +50,11 @@ function narcissistic (number){
 }
 
 function isNarcissistic(number){
-  console.log(narcissistic(153));
+  console.log(narcissistic(number)? `${number} is a narcissistic number`: `${number} is NOT a narcissistic number` );
 }
 
-// isNarcissistic(1652);
+isNarcissistic(153);
+isNarcissistic(1652);
 
 // Problem 3
 // Usually when you buy something, you're asked whether your credit card number, phone number or answer to your 
@@ -70,10 +73,21 @@ function isNarcissistic(number){
 
 function maskify(sentece){
   let phrase = Array.from(sentece);
+  let visibleCharacters = 4
   
-  console.log(phrase.splice(0,phrase.length-4));
+  if (phrase.length > visibleCharacters){
+    for(let i=0; i<phrase.length-visibleCharacters; i++){
+      phrase.splice(i,1,'#')
+      }
+  }
+
+  console.log(phrase.join(''));
 }
-maskify('hello world');
+maskify('Nananananananananananananananana Batman!');
+maskify('1');
+maskify('');
+maskify('4556364607935616');
+maskify('Anaki & Padme');
 
 // Problem 4
 // A pangram is a sentence that contains every single letter of the alphabet at least once. 
