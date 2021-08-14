@@ -136,75 +136,63 @@ isPangram('The quick brown fox jumps over the lazy');
 // "aA11" -> 2 		# 'a' and '1'
 // "ABBA" -> 2 		# 'A' and 'B' each occur twice
 
-// function duplicatesCount(sentence){
-
-//   let phrase = Array.from(sentence);
-//   let count = 0;
-
-//   console.log(sentence);
-  
-
-//   phrase = phrase.sort();
-//   console.log(phrase.join(''));
-
-//   for(let i=0; i<phrase.length; i++){
-//     console.log(`array size: ${phrase.length}`)
-//     console.log(`array index: ${i}`)
-
-
-//     if (phrase [i] == phrase[i+1]){
-//      count++;
-//      let value = phrase[i];
-//      console.log(value);
-//      phrase = phrase.filter(phrase => phrase != value);
-//      console.log(phrase.join(''));
-//     }
-//    }
-
-   
-
-//    console.log(count);
-
-// }
-
-function duplicatesCount(phrase){
-
-  // let phrase = Array.from(sentence);
-  let i = 0;
-
-  // console.log(sentence);
-  
-
-  // phrase = phrase.sort();
-  // console.log(phrase.join(''));
-
-  // for(let i=0; i<phrase.length; i++){
-  //   console.log(`array size: ${phrase.length}`)
-  //   console.log(`array index: ${i}`)
-
-
-    if (phrase[i] == phrase[i+1]){
-      let value = phrase[i];
-      phrase = phrase.filter(phrase => phrase != value);
-      console.log(phrase.join(''));
-      return 1;
-    }
-    return 0;
-}
-
-function duplicates(sentence){
+function duplicatesCount(sentence){
 
   let phrase = Array.from(sentence);
-  
   let count = 0;
-  // phrase.sort().forEach(element => console.log(element));
-  count += phrase.sort().forEach(element => duplicatesCount(phrase));
 
-  console.log(count);
+  console.log(sentence);
+  
+
+  phrase = phrase.sort();
+  console.log(phrase.join(''));
+
+  for(let i=0; i<phrase.length; i++){
+    console.log(`array size: ${phrase.length}`)
+    console.log(`array index: ${i}`)
+
+    if (phrase [i] == phrase[i+1]){
+     count++;
+     let value = phrase[i];
+     console.log(value);
+     phrase = phrase.filter(phrase => phrase != value);
+     console.log(phrase.join(''));
+    }
+   }
+
+   console.log(count);
+
 }
 
-// duplicatesCount('bananarama')
-//duplicatesCount('aabbcde');
+duplicatesCount('bananarama')
+duplicatesCount('aabbcde');
 
-duplicates('aabbcdegggf');
+
+
+// // TESTS TO IMPROVE LAST EXERCISE
+// function duplicatesCount(phrase){
+
+//   let i = 0;
+
+//     if (phrase[i] == phrase[i+1]){
+//       let value = phrase[i];
+//       phrase = phrase.filter(phrase => phrase != value);
+//       console.log(phrase.join(''));
+//       return 1;
+//     }
+//     return 0;
+// }
+
+// function duplicates(sentence){
+
+//   let phrase = Array.from(sentence);
+  
+//   let count = 0;
+//   // phrase.sort().forEach(element => console.log(element));
+//   count += phrase.sort().forEach(element => duplicatesCount(phrase));
+
+//   console.log(count);
+// }
+
+// duplicates('aabbcdegggf');
 
