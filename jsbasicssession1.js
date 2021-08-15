@@ -8,8 +8,9 @@
 function sumMultiples(number){
 
   let total =0;
+
   for(let i=0; i<number; i++){
-    (i%3 == 0 || i%5 == 0) ? total+=i : console.log('-');
+    (i%3 == 0 || i%5 == 0) ? total+=i : '';
     }
   return total;
   }
@@ -17,9 +18,9 @@ function sumMultiples(number){
   function printSum(number){
     number>0 ? console.log(`The sum of the multiples of 3 or 5 for ${number} is`, sumMultiples(number)) 
              : console.log(`${number} is a negative value`);
-    return 0; //not sure about returning 0 ...
   }
 
+  console.log('----------  PROBLEM 1 ----------');
   printSum(10);
 
   
@@ -53,6 +54,7 @@ function isNarcissistic(number){
   console.log(narcissistic(number)? `${number} is a narcissistic number`: `${number} is NOT a narcissistic number` );
 }
 
+console.log('----------  PROBLEM 2 ----------');
 isNarcissistic(153);
 isNarcissistic(1652);
 
@@ -81,13 +83,15 @@ function maskify(sentence){
       }
   }
 
-  console.log(phrase.join(''));
+  console.log(`Maskify "${sentence}" ==> ${phrase.join('')}`);
 }
+
+console.log('----------  PROBLEM 3 ----------');
 maskify('Nananananananananananananananana Batman!');
 maskify('1');
 maskify('');
 maskify('4556364607935616');
-maskify('Anaki & Padme');
+maskify('Anakin & Padme');
 
 // Problem 4
 // A pangram is a sentence that contains every single letter of the alphabet at least once. 
@@ -96,28 +100,23 @@ maskify('Anaki & Padme');
 // Given a string, detect whether or not it is a pangram. Return True if it is, False 
 // if not. Ignore numbers and punctuation.
 
-function pangram(sentence){
- //cada una del alfababeto en la oracion
+function isPangram(sentence){
 
-  let phrase = Array.from(sentence);
+ //each letter of the alphabet is in the sentence
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+  let phrase = Array.from(sentence);
   let isInAlphabet = true;
 
- 
   for(let i=0; i<alphabet.length; i++){
      if (! phrase.includes(alphabet[i])){
       isInAlphabet = false;
        break;}
     }
 
-  return isInAlphabet;
-
+  console.log(isInAlphabet? `"${sentence}" is a pangram sentence`:`"${sentence}" is NOT a pangram sentence`)
 }
 
-function isPangram(sentence){
-  console.log(pangram(sentence)? `"${sentence}" is a pangram sentence`:`"${sentence}" is NOT a pangram sentence`)
-}
-
+console.log('----------  PROBLEM 4 ----------');
 isPangram('The quick brown fox jumps over the lazy dog');
 isPangram('The quick brown fox jumps over the lazy');
 
@@ -138,61 +137,33 @@ isPangram('The quick brown fox jumps over the lazy');
 
 function duplicatesCount(sentence){
 
-  let phrase = Array.from(sentence);
+  let phrase = Array.from(sentence.toString().toLowerCase()).sort();
   let count = 0;
 
-  console.log(sentence);
-  
-
-  phrase = phrase.sort();
-  console.log(phrase.join(''));
-
   for(let i=0; i<phrase.length; i++){
-    console.log(`array size: ${phrase.length}`)
-    console.log(`array index: ${i}`)
 
-    if (phrase [i] == phrase[i+1]){
-     count++;
-     let value = phrase[i];
-     console.log(value);
-     phrase = phrase.filter(phrase => phrase != value);
-     console.log(phrase.join(''));
+    let indices = [];
+    let element = phrase[i];
+    let index = phrase.lastIndexOf(element);
+
+    while (index != -1) {
+      indices.push(index);
+      index = (index > 0 ? phrase.lastIndexOf(element, index - 1) : -1);
     }
-   }
 
-   console.log(count);
+    indices.length > 1 ? count++ : '';
+    phrase = phrase.filter(phrase => phrase != element);
+
+  }
+  console.log(`Duplicate character(s) in "${sentence}" is/are: ${count}`);
 
 }
-
-duplicatesCount('bananarama')
+console.log('----------  PROBLEM 5 ----------');
+duplicatesCount('abcde');
 duplicatesCount('aabbcde');
-
-
-
-// // TESTS TO IMPROVE LAST EXERCISE
-// function duplicatesCount(phrase){
-
-//   let i = 0;
-
-//     if (phrase[i] == phrase[i+1]){
-//       let value = phrase[i];
-//       phrase = phrase.filter(phrase => phrase != value);
-//       console.log(phrase.join(''));
-//       return 1;
-//     }
-//     return 0;
-// }
-
-// function duplicates(sentence){
-
-//   let phrase = Array.from(sentence);
-  
-//   let count = 0;
-//   // phrase.sort().forEach(element => console.log(element));
-//   count += phrase.sort().forEach(element => duplicatesCount(phrase));
-
-//   console.log(count);
-// }
-
-// duplicates('aabbcdegggf');
-
+duplicatesCount('aabBcde');
+duplicatesCount('indivisibility');
+duplicatesCount('Indivisibilities');
+duplicatesCount('aA11');
+duplicatesCount('ABBA');
+duplicatesCount('bananarama');
