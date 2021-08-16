@@ -54,3 +54,26 @@ function isPangram (text){
 }
 
 isPangram('The quick brown fox jumps over the lazy dog')
+
+
+//PROBLEM 5
+duplicates('aabAcdebe112')
+
+function duplicates(text){
+let val =  [...new Set(text.toLowerCase().replace(/[^A-Z0-9]/ig, ""))]
+let results = []
+
+ val.forEach(str =>{     
+
+    let regex =  new RegExp(`/^[${str}]/ig`)
+    let regex2 =  new RegExp(`/^[${str.toUpperCase()}]/ig`)
+
+    let count = (text.match(regex) || text.match(regex2)|| []).length
+
+    results.push(`letter ${str}, count ${count}`)    
+    
+}) 
+console.log(results);
+}
+
+
