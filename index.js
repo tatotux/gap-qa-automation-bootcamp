@@ -38,33 +38,33 @@
 // and 1652 (4 digits), which isn't:
 //     1^4 + 6^4 + 5^4 + 2^4 = 1 + 1296 + 625 + 16 = 1938
 
-        // narcissisticNumber(93084);
+        narcissisticNumber(93084);
 
-        // function narcissisticNumber(num) {
+        function narcissisticNumber(num) {
 
-        //         let originalNumber = num;
-        //         let digits = [];
-        //         let sum = 0;
-        //         let quantityNumber = 0;
+                let originalNumber = num;
+                let digits = [];
+                let sum = 0;
+                let quantityNumber = 0;
 
-        //         while (num > 0) {
-        //          digits.push(num % 10);
-        //          num = Math.trunc(num / 10);
-        //         }
+                while (num > 0) {
+                 digits.push(num % 10);
+                 num = Math.trunc(num / 10);
+                }
 
-        //         for (let i = 0; i < digits.length; i++){
-        //                 quantityNumber = digits.length;
-        //                // console.log('La cantidad de números son: ', quantityNumber);
-        //                 sum = sum + (Math.pow(digits[i], quantityNumber ));
-        //         }
+                for (let i = 0; i < digits.length; i++){
+                        quantityNumber = digits.length;
+                       // console.log('La cantidad de números son: ', quantityNumber);
+                        sum = sum + (Math.pow(digits[i], quantityNumber ));
+                }
 
-        //         console.log(originalNumber == sum) ?  'True' : 'False';
+                console.log(originalNumber == sum) ?  'True' : 'False';
 
-        //         digits.reverse();
-        //         //console.log(digits);
-        //        // console.log('The raised number is : ', sum);
+                digits.reverse();
+                //console.log(digits);
+               // console.log('The raised number is : ', sum);
 
-        // }
+        }
 
 //Problem #3
 
@@ -72,18 +72,18 @@
 // However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it.
 // Your task is to write a function maskify, which changes all but the last four characters into '#'.
 
-    // maskify('0123456789');
+    maskify('0123456789');
 
-    // function maskify(input){
+    function maskify(input){
 
-    //         if (input.length <= 4) {
-    //                  console.log(input)
-    //                  return;
-    //         }
+            if (input.length <= 4) {
+                     console.log(input)
+                     return;
+            }
             
-    //         (input.length > 4) ? console.log('#'.repeat(input.length-4) + input.substr(-4,4)) :  console.log(input);     
+            (input.length > 4) ? console.log('#'.repeat(input.length-4) + input.substr(-4,4)) :  console.log(input);     
             
-    // }
+    }
      
 
 // //Problem 4
@@ -93,44 +93,44 @@
 // Given a string, detect whether or not it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation.
 
 
-// pangram('The quick brown fox jumps over the lazy dog');
+ pangram('The quick brown fox jumps over the lazy dog');
 
-    // function pangram(text) {
+    function pangram(text) {
 
-    //         text = text.toLowerCase();
-    //         text = text.replace(/\s+/g, '');
+            text = text.toLowerCase();
+            text = text.replace(/\s+/g, '');
 
-    //         let lettersArray = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-    //         let entryTextArray = [];
-    //         let noDuplicatesArray =[];
-    //         let result;
+            let lettersArray = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+            let entryTextArray = [];
+            let noDuplicatesArray =[];
+            let result;
 
-    //         if (text.length < 26) {
-    //                 console.log('text too short');
-    //                 return;
-    //         }
-    //                 for (let i = 0; i< text.length; i++) {
-    //                                 entryTextArray[i] = text[i]; 
-    //                                 entryTextArray.sort();  
-    //                                 noDuplicatesArray = [ ...new Set(entryTextArray) ];  
+            if (text.length < 26) {
+                    console.log('text too short');
+                    return;
+            }
+                    for (let i = 0; i< text.length; i++) {
+                                    entryTextArray[i] = text[i]; 
+                                    entryTextArray.sort();  
+                                    noDuplicatesArray = [ ...new Set(entryTextArray) ];  
                 
-    //                 }     
+                    }     
 
-    //                 //console.log(noDuplicatesArray.length);
-    //                 //console.log(lettersArray.length);
+                    //console.log(noDuplicatesArray.length);
+                    //console.log(lettersArray.length);
 
-    //                 for (let j = 0; j < lettersArray.length; j++) {
-    //                         for (let k = 0; k < noDuplicatesArray.length; k++) {
+                    for (let j = 0; j < lettersArray.length; j++) {
+                            for (let k = 0; k < noDuplicatesArray.length; k++) {
 
-    //                                 if (lettersArray[j] == noDuplicatesArray[k])
-    //                                         result= 'true'; 
-    //                                         else
-    //                                         result= 'false'; 
-    //                         }
+                                    if (lettersArray[j] == noDuplicatesArray[k])
+                                            result= 'true'; 
+                                            else
+                                            result= 'false'; 
+                            }
                     
-    //                 } 
-    //         console.log(result);
-    //  }
+                    } 
+            console.log(result);
+     }
 
 
 // Exercise 5
@@ -140,36 +140,36 @@
 // more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
 
 
-    // duplicates("punctuation");
+    duplicates("punctuation");
 
-    // function duplicates(input){
+    function duplicates(input){
 
-    // console.log(input);
-    // input = input.replace(/\s+/g, '');
-    // let arrayInput=[];
-    // let counts= {};
+    console.log(input);
+    input = input.replace(/\s+/g, '');
+    let arrayInput=[];
+    let counts= {};
 
-    //             for (let i = 0; i< input.length; i++) {
-    //                         arrayInput[i] = input[i]; 
+                for (let i = 0; i< input.length; i++) {
+                            arrayInput[i] = input[i]; 
                         
-    //                 }
+                    }
 
-    //         for(let i =0; i < arrayInput.length; i++){ 
-    //                 if (counts[arrayInput[i]]){
-    //                 counts[arrayInput[i]] += 1
-    //                 } else {
-    //                 counts[arrayInput[i]] = 1
-    //                 }
-    //         }  
-    //         for (let prop in counts){
+            for(let i =0; i < arrayInput.length; i++){ 
+                    if (counts[arrayInput[i]]){
+                    counts[arrayInput[i]] += 1
+                    } else {
+                    counts[arrayInput[i]] = 1
+                    }
+            }  
+            for (let prop in counts){
 
-    //                 if((counts[prop] < 1)){
-    //                     //  console.log("No characters repeats more than once.")
-    //                 } else {
-    //                         console.log(prop + " occurs: " + counts[prop] + " time(s).")
-    //                 }
-    //         }
-    //         //console.log(arrayInput);
-    //     // console.log(counts)
-    // }
+                    if((counts[prop] < 1)){
+                        //  console.log("No characters repeats more than once.")
+                    } else {
+                            console.log(prop + " occurs: " + counts[prop] + " time(s).")
+                    }
+            }
+            //console.log(arrayInput);
+        // console.log(counts)
+    }
 
