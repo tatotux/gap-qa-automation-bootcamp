@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "gap-qa-automation-bootcamp",
   "version": "1.0.0",
   "description": "",
