@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //provides autocmplete and parameter typings
-const axios = require('axios').default;
+//const axios = require('axios').default;
 
 axios({
     method:'GET',
