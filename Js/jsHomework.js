@@ -62,13 +62,16 @@ const countDuplicates = (text) => {
     let arr = text.toLowerCase().split('');
     const unique = [...new Set(arr)];
     let duplicates = arr.length - unique.length;
+    console.log(unique);
     console.log('There are ' + duplicates + ' duplicates');
 }
 
 
-
+/*
 sumMultiples(10);
 console.log('Is it a Narsicistic number?: ' + isNarcicistic(153));
 maskify('Nananananananananananananananana Batman!');
-console.log('Is this a Panagram? ', isPanagram("The quick brown fox jumps over the lazy dog"));
-countDuplicates('indivisibility');
+console.log('Is this a Panagram? ', isPanagram("How vexingly quick daft zebras jump!"));
+
+*/
+countDuplicates('Indivisibilities');
