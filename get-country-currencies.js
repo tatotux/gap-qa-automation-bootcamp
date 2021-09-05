@@ -56,14 +56,5 @@ const getFile = new Promise((resolve, reject) => {
     }
 });
 
-// csvToArray()
-//     .then(res =>{
-//         console.log(res);
-//     })
-//     .catch(error =>{
-//         console.log(error);
-//     });
-
-
 export {csvToArray};
 

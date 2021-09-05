@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {csvToArray} from './get-country-currencies.js';
  
+
 const getAllExchangeRates =  currencyCode => {
 
     return new Promise((resolve, reject) => {
@@ -38,10 +39,7 @@ async function getExchangeRate(currencyCode) {
     try {
         const respnse = await getAllExchangeRates(currencyCode);
         const exchangeRates = respnse.conversion_rates;
-        console.log('===========================================================================');
-        console.log(exchangeRates);
 
-        console.log(' ======================= LLAMANDO LA PROMESA CSVTOARRAY');
         const countries = await csvToArray()
                                 .then(res =>{
                                     return(res);
@@ -49,7 +47,13 @@ async function getExchangeRate(currencyCode) {
                                 .catch(error =>{
                                     console.log(error);
                                 });
-        console.log(countries);
+
+        let exchangeRateInfo = {
+            'code': '',
+            'country' : '',
+            'currencyName' : '',
+            'rate' : 0
+        }
 
     } catch (e) {
         console.log(e)
