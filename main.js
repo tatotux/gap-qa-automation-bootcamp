@@ -84,7 +84,8 @@ async function getExchangeRate(currencyCode) {
     }
 };
 
-getExchangeRate('DOP')
+const baseCode = process.argv.slice(2);
+getExchangeRate(baseCode)
 .then(res =>{
     return(res);
 })
