@@ -1,24 +1,30 @@
+import dotenv from 'dotenv';
+dotenv.config({path:'.env'});
 import axios from 'axios';
-import { printTable } from 'console-table-printer';
+import {printTable} from 'console-table-printer';
 import {csvToArray} from './get-country-currencies.js';
+
  
 
 const getAllExchangeRates =  currencyCode => {
 
     return new Promise((resolve, reject) => {
 
-            axios({
-                method:'GET',
-                // baseURL: 'https://v6.exchangerate-api.com/',
-                url: 'https://v6.exchangerate-api.com/v6/0b7f1a21180a722c55a6d05b/latest/USD',
-                responseType: 'json'
-            }),
+        const apiKey = process.env.EXCHANGE_API_KEY;
+        
+        if(apiKey){
+            const url = 'https://v6.exchangerate-api.com/v6/' + process.env.EXCHANGE_API_KEY + '/latest/' + currencyCode;
 
-            axios.get(currencyCode)
-            .then( function (response){
+            axios.get(url)
+            .then(function(response){
             
                 if (response.status === 200){
                     const data = response.data;
+                    resolve(data);
+                }
+
+                if (response.status === 404){
+                    const data = response.data.error-type;
                     resolve(data);
                 }
             })
@@ -32,6 +38,10 @@ const getAllExchangeRates =  currencyCode => {
                   
             })
             .then(function(){})
+        }else{ 
+            reject('ERROR: API Key not found');
+        }
+    
     });
 };
 
@@ -46,7 +56,7 @@ async function getExchangeRate(currencyCode) {
                                     return(res);
                                 })
                                 .catch(error =>{
-                                    console.log(error);
+                                    creturn(error);
                                 });
 
        
@@ -66,7 +76,7 @@ async function getExchangeRate(currencyCode) {
             return exchangeRateInfo;
 
         });
-  
+        console.log(`Exchange Rates for base code ${currencyCode}`);
         printTable(exchangeRateTable);
 
     } catch (e) {
@@ -74,4 +84,10 @@ async function getExchangeRate(currencyCode) {
     }
 };
 
-getExchangeRate('https://v6.exchangerate-api.com/v6/0b7f1a21180a722c55a6d05b/latest/USD');
+getExchangeRate('DOP')
+.then(res =>{
+    return(res);
+})
+.catch(error =>{
+    return (error);
+});
