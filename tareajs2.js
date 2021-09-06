@@ -24,7 +24,7 @@ const getSpecificCurrency= (coin)=> {
       });
 
 };
-
+//get all currency and fill data
 function getAllCurrency (){
     axios.get('https://v6.exchangerate-api.com/v6/'+apiKey+'/latest/USD')
     .then(response => {
@@ -35,17 +35,20 @@ function getAllCurrency (){
       });
  
  };
+
+ //show only 1 rate
 const showOnlyRate = (jsonData, currencyData) =>
 {
 console.log(currencyData);
  let rate= {
-     currencyName: currencyData['currency_name_short'],
+    currencyCode: jsonData['target_code'],
+    currencyName: currencyData['currency_name_short'],
      country: currencyData['locale'],
      rate:   jsonData['conversion_rate']
     };
-    console.table([rate], ['currencyName','country','rate']);
+    console.table([rate], ['currencyCode','currencyName','country','rate']);
 }
-
+ //get currency data to fill infor
 const getCurrencyData =(code)=>{
     axios.get('https://v6.exchangerate-api.com/v6/'+apiKey+'/enriched/USD/'+ code)
     .then(response => {
@@ -56,7 +59,7 @@ const getCurrencyData =(code)=>{
       });
 
 }
-
+ //fill country on data
 const fillCountry=(code,currencyData)=>{
     let indexElement= allCurrency.findIndex ( (element) => element.currency == code);
     allCurrency[indexElement].country =currencyData['locale'];
@@ -64,6 +67,7 @@ const fillCountry=(code,currencyData)=>{
 
 }
 
+//fill the rate data for all the currency
 const fillAllRate = (jsonData) =>
 {
     for (const key in jsonData) {
