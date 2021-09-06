@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import fs from "fs";
 
 async function csvToArray(){
@@ -13,7 +12,7 @@ async function csvToArray(){
                             console.log(error);
                         });
 
-        const headers = str.slice(0, str.indexOf(newLine)).split(delimiter);  // Currency Code | Currency Name | Country
+        const headers = str.slice(0, str.indexOf(newLine)).split(delimiter);
         const lines = str.slice(str.indexOf(newLine)+2).split(newLine);
 
         const array = lines.map(function (line) {

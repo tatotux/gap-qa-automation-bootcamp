@@ -6,6 +6,8 @@
   "main": "main.js",
   "dependencies": {
     "axios": "^0.21.1",
+    "console-table-printer": "^2.10.0",
+    "csv-parser": "^3.0.0",
     "node-fetch": "^3.0.0"
   },
   "devDependencies": {},

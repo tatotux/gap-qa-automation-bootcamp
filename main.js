@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { printTable } from 'console-table-printer';
 import {csvToArray} from './get-country-currencies.js';
  
 
@@ -37,10 +38,10 @@ const getAllExchangeRates =  currencyCode => {
 //con await y async la promesa se seresuelve automaticamente. no necesito el then - catch
 async function getExchangeRate(currencyCode) {
     try {
-        const respnse = await getAllExchangeRates(currencyCode);
-        const exchangeRates = respnse.conversion_rates;
+        const httpResponse = await getAllExchangeRates(currencyCode);
+        const exchangeRates = httpResponse.conversion_rates;
 
-        const countries = await csvToArray()
+        const supportedCountries = await csvToArray()
                                 .then(res =>{
                                     return(res);
                                 })
@@ -48,12 +49,25 @@ async function getExchangeRate(currencyCode) {
                                     console.log(error);
                                 });
 
-        let exchangeRateInfo = {
-            'code': '',
-            'country' : '',
-            'currencyName' : '',
-            'rate' : 0
-        }
+       
+        let exchangeRateTable = supportedCountries.map(function (element){
+
+            let rate = 0;
+
+            for (const key in exchangeRates) {
+                key == element['code'] ? rate = exchangeRates[key] : '';
+            }
+
+            const exchangeRateInfo = {
+                'code': element['code'],
+                'country' : element['country'],
+                'rate' : rate
+            }
+            return exchangeRateInfo;
+
+        });
+  
+        printTable(exchangeRateTable);
 
     } catch (e) {
         console.log(e)
