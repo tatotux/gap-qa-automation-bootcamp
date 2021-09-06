@@ -8,7 +8,7 @@ function sumMultiples(num) {
             multiples.push(i);
         }
     }
-    console.log("El listado de los multiplos es: " + multiples, " y su suma es: " + sum);
+    // console.log("El listado de los multiplos es: " + multiples, " y su suma es: " + sum);
 }
 
 //-------------------------Problem 2-------------------------------------
@@ -72,6 +72,5 @@ sumMultiples(10);
 console.log('Is it a Narsicistic number?: ' + isNarcicistic(153));
 maskify('Nananananananananananananananana Batman!');
 console.log('Is this a Panagram? ', isPanagram("How vexingly quick daft zebras jump!"));
-
-*/
 countDuplicates('Indivisibilities');
+*/
