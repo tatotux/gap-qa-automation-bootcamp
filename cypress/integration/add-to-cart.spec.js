@@ -8,5 +8,6 @@ describe('Add to cart', () => {
 
     it('should add to cart', () => {
         cy.get('#masthead .search-field').type('Belt{enter}');
+        cy.contains('.product_title','Belt').should('be.visible');
     });
 });
