@@ -16,7 +16,8 @@
     "url": "https://github.com/euribes/gap-qa-automation-bootcamp/issues"
   },
   "homepage": "https://github.com/euribes/gap-qa-automation-bootcamp#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "cypress": "^8.3.1"
   }
 }
