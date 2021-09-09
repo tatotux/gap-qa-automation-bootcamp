@@ -12,7 +12,6 @@ describe ('Add to cart', () => {
         cy.contains('.product_title', 'Belt').should('be.visible');
 
         // Add to cart
-        cy.get('.cart button').type('{enter}');
         cy.get('.cart button').click();
 
         // View Cart 
