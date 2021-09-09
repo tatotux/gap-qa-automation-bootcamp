@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe ('Add t cart', () => {
+describe ('Add to cart', () => {
     beforeEach(() => {
         cy.visit('http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/');
     });
@@ -13,13 +13,15 @@ describe ('Add t cart', () => {
 
         // Add to cart
         cy.get('.cart button').type('{enter}');
+        cy.get('.cart button').click();
 
         // View Cart 
-        cy.get('.woocommerce-message').should('be.visible');
-        cy.contains('a[href^="http:"] ', 'View Cart').type('{enter}');
-
+        cy.get('.woocommerce-message').contains('has been added to your cart.').should('be.visible');
+        cy.get('div.woocommerce > div > a').click();
 
         // Product appears on the cart
+        cy.get('a[href^="http"]').contains('Belt').should('be.visible');
+
     });
     
 
