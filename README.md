@@ -1,1 +1,0 @@
-# gap-qa-automation-bootcamp
