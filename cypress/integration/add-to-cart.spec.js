@@ -1,8 +1,11 @@
 /// <reference types="cypress" />
 
+import { ProductDetailPage } from '../page-objects/pages/product-detail';
+import { CartPage } from '../page-objects/pages/cart';
+
 describe ('Add to cart', () => {
     beforeEach(() => {
-        cy.visit('http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/');
+        cy.visit('/');
     });
 
     it('shoud add to cart', () => {
@@ -10,20 +13,18 @@ describe ('Add to cart', () => {
         // Search for product
         cy.get('#masthead .search-field').type('Belt{enter}');
         cy.contains('.product_title', 'Belt').should('be.visible');
-
+ 
         // Add to cart
-        cy.get('.cart button').click();
+        ProductDetailPage.elemets.addToCart().click();
+        ProductDetailPage.elemets.addedMessage().should('be.visible');
+        ProductDetailPage.elemets.viewCart().click();
 
-        // View Cart 
-        cy.get('.woocommerce-message').contains('has been added to your cart.').should('be.visible');
-        cy.get('div.woocommerce > div > a').click();
-
+       
         // Product appears on the cart
-        cy.get('a[href^="http"]').contains('Belt').should('be.visible');
+        CartPage.elements.belt().should('be.visible');
+        // cy.get('a[href^="http"]').contains('Belt').should('be.visible');
 
     });
     
 
 })
-
-
