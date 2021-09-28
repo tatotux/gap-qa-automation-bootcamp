@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 import { cart } from '../page-objects/Cart';
+import { checkout } from '../page-objects/Checkout';
 import { homePage } from '../page-objects/HomePage'
 import { productPage } from '../page-objects/ProductPage';
+import { confirmationPage } from '../page-objects/ConfirmationPage';
 
 describe('Add to cart functionality', () => {
     before(() => {
@@ -12,13 +14,20 @@ describe('Add to cart functionality', () => {
         cy.url().should('contain', 'polo')
         productPage.elements.getProductTitle().should('have.text', 'Polo')
     })
-    it('should add to cart', () => {
+    it('should place an order', () => {
         productPage.clickAddToCartBtn()
         productPage.elements.getConfirmationMsg().should('contain', '“Polo” has been added to your cart.')
         productPage.clickViewCartContentsBtn();
-    })
-    it('should show previously added product in Cart', () => {
-        cart.elements.getCartProduct().should('contain', 'Polo')
+        cart.elements.getCartProduct().should('contain', 'Polo');
+
+        checkout.clickCheckoutBtn();
+        checkout.fillOutBillingForm('checkoutForm')
+        checkout.form.getDifferentShippingAddressCheckbox().uncheck()
+        checkout.form.getAgreeTermsCheckbox().check()
+        checkout.form.getPlaceOrderButton().click()
+
+        confirmationPage.elements.getConfirmationMessage()
+            .should('have.text', 'Thank you. Your order has been received.')
     })
 })
 

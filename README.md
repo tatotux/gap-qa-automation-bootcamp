@@ -2,7 +2,13 @@
 
 # UI Cypress Automation Challenge
 
-This project tests the application `Testing Playground` and addresses the story `SIR-1 - UI Test - Cypress - Add/Delete to/from cart functionality` using the Page Object Model
+This project tests the application `Testing Playground` and adds the test `place-order.spec.js`that has the objective of testing the completion of an order.
+The process to complete an order involves:
+
+1. Searching for a product
+2. Adding the product to the cart
+3. Filling out the form for the Shipping and Billing information
+4. Processing the order
 
 ## Getting Started
 
@@ -23,9 +29,9 @@ on Mac:
 ## Running the tests
 
 1. Using the terminal navigate to the folder you created to clone the repository
-   - To open Cypress' GUI run `npx cypress open` Then you will have the ability to pick the tests to run
+   - To open Cypress' GUI run `npx cypress open` Then you will have the ability to pick the tests to run (`place-order.spec.js`)
 
 ## Available Tests to Execute
 
-- `add-to-cart.spec.js`
+- `place-order.spec.js`
 - `remove-from-cart.spec.js`
