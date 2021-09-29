@@ -1,0 +1,10 @@
+{
+  "watchForFileChanges": false,
+  "baseUrl": "http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/",
+  "viewportWidth": 1366,
+  "viewportHeight": 768,
+  "env": {
+      "QA_USER": "test@gmail.com",
+      "QA_PASSWORD": "3I5KapT6QdNu121OqI3!Y^)#"
+    }
+  }
