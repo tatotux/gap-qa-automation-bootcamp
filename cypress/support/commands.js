@@ -1,31 +1,48 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.add('openLogin', () => {
-  cy.visit('/wp-login.php')
+Cypress.Commands.add('submitPlaceOrderForm', (bil_first_name, bil_last_name, bil_company, bil_country,
+  bil_address_1, bil_city, bil_state, bil_postcode, bil_phone, bil_email, ship_first_name, ship_last_name,
+  ship_company, ship_country, ship_address_1, ship_city, ship_state, ship_postcode) => {
+    cy.get('#primary').find('form').then( form => {
+    cy.wrap(form).find('[id="billing_first_name"]').type(bil_first_name)
+    cy.wrap(form).find('[id="billing_last_name"]').type(bil_last_name)
+    cy.wrap(form).find('[id="billing_company"]').type(bil_company)
+    cy.wrap(form).find('[id="billing_country"]').select(bil_country, {force: true})
+    cy.wrap(form).find('[id="billing_address_1"]').type(bil_address_1)
+    cy.wrap(form).find('[id="billing_city"]').type(bil_city)
+    cy.wrap(form).find('[id="billing_state"]').type(bil_state)
+    cy.wrap(form).find('[id="billing_postcode"]').type(bil_postcode)
+    cy.wrap(form).find('[id="billing_phone"]').type(bil_phone)
+    cy.wrap(form).find('[id="billing_email"]').type(bil_email)
+    cy.wrap(form).find('[id="shipping_first_name"]').type(ship_first_name)
+    cy.wrap(form).find('[id="shipping_last_name"]').type(ship_last_name)
+    cy.wrap(form).find('[id="shipping_company"]').type(ship_company)
+    cy.wrap(form).find('[id="shipping_country"]').select(ship_country, {force: true})
+    cy.wrap(form).find('[id="shipping_address_1"]').type(ship_address_1)
+    cy.wrap(form).find('[id="shipping_city"]').type(ship_city)
+    cy.wrap(form).find('[id="shipping_state"]').type(ship_state)
+    cy.wrap(form).find('[id="shipping_postcode"]').type(ship_postcode)
+    cy.wrap(form).find('[id="terms"]').check({force: true})
+    cy.wrap(form).find('[id="place_order"]').click()
+    }
+    )
 })
-Cypress.Commands.add('openHomePage', () => {
-  cy.visit('/')
+Cypress.Commands.add('clearPlaceOrderForm', () => {
+    cy.get('#primary').find('form').then( form => {
+    cy.wrap(form).find('[id="billing_first_name"]').clear()
+    cy.wrap(form).find('[id="billing_last_name"]').clear()
+    cy.wrap(form).find('[id="billing_company"]').clear()
+    cy.wrap(form).find('[id="billing_address_1"]').clear()
+    cy.wrap(form).find('[id="billing_city"]').clear()
+    cy.wrap(form).find('[id="billing_state"]').clear()
+    cy.wrap(form).find('[id="billing_postcode"]').clear()
+    cy.wrap(form).find('[id="billing_phone"]').clear()
+    cy.wrap(form).find('[id="billing_email"]').clear()
+    cy.wrap(form).find('[id="shipping_first_name"]').clear()
+    cy.wrap(form).find('[id="shipping_last_name"]').clear()
+    cy.wrap(form).find('[id="shipping_company"]').clear()
+    cy.wrap(form).find('[id="shipping_address_1"]').clear()
+    cy.wrap(form).find('[id="shipping_city"]').clear()
+    cy.wrap(form).find('[id="shipping_state"]').clear()
+    cy.wrap(form).find('[id="shipping_postcode"]').clear()
+    }
+    )
 })
