@@ -9,7 +9,7 @@ context('Testing Playground - homework 2',() =>{
     describe('Exercise 2',()=>{
 
         before(()=>{
-            cy.visit("")            
+            cy.visit("");           
         })
 
         it('E2E - Verify a full order process',()=>{
@@ -25,9 +25,8 @@ context('Testing Playground - homework 2',() =>{
             cy.get(checkoutPage.elements.ship_to_different_address).should('be.visible').uncheck();
             cy.get(checkoutPage.elements.terms_checkbox).should('be.visible').click({force:true});
             cy.get(checkoutPage.elements.place_order_button).should('be.visible').click({force:true});
-            cy.get('.entry-header .entry-title').should('be.visible')
-            cy.url().should('contain', '/checkout/order-received/')
-            
+            cy.url().should('contain', '/checkout/order-received/');
+            cy.get(checkoutPage.elements.title).should('be.visible').contains("Order received");            
         })
 
     })

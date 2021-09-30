@@ -12,7 +12,8 @@ export const elements = {
 
     "ship_to_different_address":"#ship-to-different-address-checkbox",
     "terms_checkbox":"#terms",
-    "place_order_button":"#place_order"    
+    "place_order_button":"#place_order",
+    "title":".entry-header .entry-title"   
 };
 
 export function fill_billing_info(data){
