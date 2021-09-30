@@ -23,3 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('searchProduct', (productName) => {
+    cy.get('#masthead .search-field').type(productName)
+    cy.get('#masthead .search-field').type('{enter}')
+})
