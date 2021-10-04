@@ -1,0 +1,13 @@
+{
+    "firstName" : "Alejandra",
+    "lastName" : "Parra",
+    "company" : "Growth Acceleration Partners",
+    "countryList" : "CO",
+    "addressBox1" : "Test address",
+    "addressBox2" : "T1 Apto 501",
+    "cityBox" : "Sabaneta",
+    "stateBox" : "Antioquia",
+    "postcodeBox" : "90001",
+    "phoneNumberBox" : "123456",
+    "emailBox" : "alemail"
+}
