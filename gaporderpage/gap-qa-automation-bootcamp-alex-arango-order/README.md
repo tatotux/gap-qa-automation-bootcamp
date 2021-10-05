@@ -1,22 +1,23 @@
 # gap-qa-automation-bootcamp
 
-# UI Cypress Automation Challenge
+# Bootcamp Challenge
 
-This project tests the application `Testing Playground` and adds the test `place-order.spec.js`that has the objective of testing the completion of an order.
-The process to complete an order involves:
+This project tests the application `Testing Playground` and adds the test `place-order.spec.js`that has the purpose to add a new order of a new product.
 
-1. Searching for a product
-2. Adding the product to the cart
-3. Filling out the form for the Shipping and Billing information
-4. Processing the order
+
+
+1. Find an existing product
+2. Adding this prodcuct to the cart 
+3. shipping and billing the information for this new product
+4. And finally process the order
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+Clone the project and run this in your machine
 
 ### Prerequisites
 
-You need to install NodeJS before using Cypress
+You need to install NodeJS before using Cypress. 
 
 ### Installing
 
@@ -24,14 +25,16 @@ on Mac:
 
 1. Install NodeJS
 2. Create a folder in your local machine and clone the repository
-3. Install the dependencies from `package.json`by executing the command `npm install`
+3. Install the dependencies from `package.json`by executing the command `npm install`. 
 
-## Running the tests
+## Run the test
 
-1. Using the terminal navigate to the folder you created to clone the repository
-   - To open Cypress' GUI run `npx cypress open` Then you will have the ability to pick the tests to run (`place-order.spec.js`)
+1. Once you clone the repository you can run your test.
+   - To open them just run in terminal `npx cypress open` Then just hit the test you will need to run (`place-order.spec.js`)
 
-## Available Tests to Execute
+## Test cases: 
 
 - `place-order.spec.js`
 - `remove-from-cart.spec.js`
+
+Make sure to follow the steps mentioned above. If for some reason you get an error try to restart your machine and do this again.
