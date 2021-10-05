@@ -1,19 +1,19 @@
-class ProductDetailPage{
+class ProductDetail {
 
     url = '';
-    elemets = {
+    elements = {
         addToCart: () => cy.contains('button', 'Add to cart'),
         addedMessage: () => cy.contains('div', 'has been added to your cart.'),
         viewCart: () => cy.contains('a', 'View cart'),
     }
 
-    addToCart() {
-        this.elemets.addToCart().click();
-    }
+    // addToCart() {
+    //     this.elemets.addToCart().click();
+    // }
 
-    viewCart() {
-        this.elemets.viewCart().click();
-    }
+    // viewCart() {
+    //     this.elemets.viewCart().click();
+    // }
 }
 
-export const ProductDetail = new ProductDetailPage();
+export const ProductDetailPage = new ProductDetail();

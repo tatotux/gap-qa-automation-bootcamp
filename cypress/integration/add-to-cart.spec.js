@@ -2,29 +2,48 @@
 
 import { ProductDetailPage } from '../page-objects/pages/product-detail';
 import { CartPage } from '../page-objects/pages/cart';
+import { SearchBoxComponent } from '../page-objects/components/search-box';
+import { CheckoutDetailsPage } from '../page-objects/pages/checkout-details';
+
 
 describe ('Add to cart', () => {
     beforeEach(() => {
         cy.visit('/');
     });
 
-    it('shoud add to cart', () => {
+    it('should add to cart', () => {
 
         // Search for product
-        cy.get('#masthead .search-field').type('Belt{enter}');
-        cy.contains('.product_title', 'Belt').should('be.visible');
+        // SearchBoxComponent.elements.input().type('Belt{enter}');
+        SearchBoxComponent.searchText('Belt');
  
-        // Add to cart
-        ProductDetailPage.elemets.addToCart().click();
-        ProductDetailPage.elemets.addedMessage().should('be.visible');
-        ProductDetailPage.elemets.viewCart().click();
+        // Product details page
+        ProductDetailPage.elements.addToCart().click();
+        ProductDetailPage.elements.addedMessage().should('be.visible');
+        ProductDetailPage.elements.viewCart().click();
 
-       
-        // Product appears on the cart
+        // Cart page
+        cy.url().should('include','/cart');
+        cy.title().should('include', 'Cart');
         CartPage.elements.belt().should('be.visible');
-        // cy.get('a[href^="http"]').contains('Belt').should('be.visible');
+        CartPage.elements.subtotal().should('be.visible');
+        CartPage.elements.proceedToCheckout().click();
+
+        //Checkout page
+        cy.url().should('include','/checkout');
+        CheckoutDetailsPage.fillBillingDetails('Sonia', 'Sibaja');
 
     });
+
+    it('should checkout order', () => {
+
+        // cy.visit('/che');
+        
+
+        // CheckoutDetailsPage.fillBillingDetails('Sonia');
+    });
+
+    it('should place order', () => {});
     
 
 })
