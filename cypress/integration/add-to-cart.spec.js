@@ -1,27 +1,32 @@
 /// <reference types="cypress" />
+import { ProductPage } from '../page-objects/pages/product-detail'
+import { cartPage } from '../page-objects/pages/cart'
+import { searchComponent } from '../page-objects/components/search-input'
 
 describe('Add to cart', () => {
 
     beforeEach(() => {
-        cy.visit('http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/');
+        cy.visit('/');
     });
 
 
     it('should add product to cart', () => {
+        //Search Page
+        // SearchComponent.elements.searchInput().type('Belt{enter}');
+        searchComponent.searchText('Belt');
 
-        //Search for product
-        cy.get('#masthead input.search-field').type('Belt{enter}');
-        cy.contains('.product_title', 'Belt').should('be.visible');
 
-        //Add product to cart
-        cy.get(`button[name='add-to-cart']`).click();
-        cy.get(`div[role='alert']`).should('include.text', '“Belt” has been added to your cart.')
+        //Product Detail page
+        ProductPage.elements.title().should('contain', 'Belt');
+        ProductPage.elements.addToCart().click();
+        ProductPage.elements.viewCart().click();
 
-        //View cart
-        cy.get(`div[role='alert'] > .button.wc-forward`).click();
+        //Cart page
+        cartPage.elements.productTitle().should('contain', 'Belt');
+        cartPage.elements.subtotal().should('contain', '$55.00');
+        cy.url().should('include', cartPage.url);
+        cy.title().should('include', cartPage.title);
 
-        //Product appears on the cart
-        cy.get('.product-name > a').should('have.text', 'Belt')
 
     });
 
