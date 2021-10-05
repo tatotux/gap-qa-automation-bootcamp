@@ -1,0 +1,28 @@
+{
+  "name": "gap-qa-automation-bootcamp",
+  "version": "1.0.0",
+  "description": "Cypress task 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/euribes/gap-qa-automation-bootcamp.git"
+  },
+  "keywords": [
+    "cypress",
+    "pom",
+    "bootcamp"
+  ],
+  "author": "Melissa Muñoz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/euribes/gap-qa-automation-bootcamp/issues"
+  },
+  "homepage": "https://github.com/euribes/gap-qa-automation-bootcamp#readme",
+  "dependencies": {
+    "cypress": "^8.5.0",
+    "faker": "^5.5.3"
+  }
+}
