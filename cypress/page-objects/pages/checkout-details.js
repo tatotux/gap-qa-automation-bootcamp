@@ -2,7 +2,6 @@ class CheckoutDetails {
 
     url = '';
     elements = {
-
         //Billing details
         firstNameInput: () => cy.get('#billing_first_name'),
         lastNameInput: () => cy.get('#billing_last_name'),
@@ -31,6 +30,8 @@ class CheckoutDetails {
         //Checkout details
         termsAndConditionsCheckBox: () => cy.get('#terms'),
         placeOrderButton: () => cy.contains('button', 'Place order'),
+        
+        
 
         orderReceivedMessage: () => cy.contains('h1', 'Order received'),
     }
