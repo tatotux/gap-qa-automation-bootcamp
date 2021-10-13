@@ -16,15 +16,18 @@ export class Checkout{
     }
 
 
-    fillCheckoutFields(firstname,lastname,country,address,city,state,phone,email){
-        this.elements.getfirstnameField().type(firstname)
-        this.elements.getlastnameField().type(lastname)
-        this.elements.getcountryField().type(country)
-        this.elements.getaddressField().type(address)
-        this.elements.getcityField().type(city)
-        this.elements.getstateField().type(state)
-        this.elements.getphoneField().type(phone)
-        this.elements.getemailField().type(email)
+    fillCheckoutFields(firstname, lastname, country, address, city, state, phone, email  ){
+
+        cy.fixture('info').then(function (data){ this.data = data})
+
+        this.elements.getfirstnameField().type(this.data.firstname)
+        this.elements.getlastnameField().type(this.data.lastname)
+        this.elements.getcountryField().type(this.data.country)
+        this.elements.getaddressField().type(this.data.address)
+        this.elements.getcityField().type(this.data.city)
+        this.elements.getstateField().type(this.data.state)
+        this.elements.getphoneField().type(this.data.phone)
+        this.elements.getemailField().type(this.data.email)
     }
 
 
