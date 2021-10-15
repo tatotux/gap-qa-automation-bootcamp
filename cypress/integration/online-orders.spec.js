@@ -72,11 +72,14 @@ describe ('Online orders', () => {
         //Checkout page
         cy.url().should('include','/checkout');
     
+        // CheckoutDetailsPage.fillBillingDetails(faker.name.firstName(), faker.name.lastName(),'Costa Rica', faker.address.streetAddress(),
+        //                                     faker.address.secondaryAddress(), faker.address.city(), faker.address.state(), faker.address.zipCode(),
+        //                                     faker.phone.phoneNumber("(###)########"), faker.internet.email());
         CheckoutDetailsPage.fillBillingDetails(faker.name.firstName(), faker.name.lastName(),'Costa Rica', faker.address.streetAddress(),
                                             faker.address.secondaryAddress(), faker.address.city(), faker.address.state(), faker.address.zipCode(),
-                                            faker.phone.phoneNumber("(###)########"), faker.internet.email());
+                                            faker.phone.phoneNumber("(###)########"), `ssibajav${Date.now()}@mail.com`);
         CheckoutDetailsPage.fillShippingDetails(faker.name.firstName(), faker.name.lastName(), 'UnitedStatus (US)', faker.address.streetAddress(), 
-                                            faker.address.secondaryAddress(), 'Austin', 'Texas', faker.address.zipCode(), faker.lorem.sentence());
+                                            faker.address.secondaryAddress(), 'Austin', 'Texas', faker.address.zipCode(), 'comments');
         
     });
 
