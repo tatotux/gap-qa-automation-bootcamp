@@ -5,28 +5,30 @@ import { CartPage } from '../page-objects/pages/cart';
 import { SearchBoxComponent } from '../page-objects/components/search-box';
 import { CheckoutDetailsPage } from '../page-objects/pages/checkout-details';
 import { CouponRequests } from '../support/coupon-api-requests';
+import { OrderRequests } from '../support/order-api-requests';
 
 import faker from 'faker';
+import { orderBy } from 'cypress/types/lodash';
 
 
 describe ('Online orders', () => {
 
-    let coupon = {
-            code: "ssibaja_10off",
-            discount_type: "percent",
-            amount: "10",
-            individual_use: true,
-            exclude_sale_items: true
-        }
-
-    // let couponId;
+    // let coupon = {
+    //         code: "SSIBAJA_10off",  
+    //         discount_type: "percent",
+    //         amount: "10",
+    //         individual_use: true,
+    //         exclude_sale_items: true
+    //     }
 
     before('Create coupon', () => {
-        CouponRequests.create();
+        // CouponRequests.create();
+        OrderRequests.create();
     });
 
     after('Delete coupon', () => {
-        CouponRequests.delete();
+        // CouponRequests.delete();
+        OrderRequests.delete();
     });
 
     it('should checkout order', () => {

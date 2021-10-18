@@ -1,35 +1,37 @@
-class OrderRequests {
+class OrderAPIRequest {
 
     create() {
 
+        orderId;
+
         cy.request({
             method: 'POST',
-            url: 'http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/', // baseUrl is prepended to url
+            url: '/wp-json/wc/v3/orders', // baseUrl is prepended to url
             auth: {
                 username: 'automation',
                 password: 'automation'
             },
-            // form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+            form: true,
             body: {
                 payment_method: "bacs",
                 payment_method_title: "Direct Bank Transfer",
                 set_paid: true,
                 billing: {
-                    first_name: "John",
-                    last_name: "Doe",
+                    first_name: "SONIA",
+                    last_name: "SIBAJA",
                     address_1: "969 Market",
                     address_2: "",
                     city: "San Francisco",
                     state: "CA",
                     postcode: "94103",
                     country: "US",
-                    email: "john.doe@example.com",
+                    email: `ssibajav${Date.now()}@gmail.com`,
                     phone: "(555) 555-5555"
                 },
                 shipping: 
                 {
-                    first_name: "John",
-                    last_name: "Doe",
+                    first_name: "SONIA",
+                    last_name: "SIBAJA",
                     address_1: "969 Market",
                     address_2: "",
                     city: "San Francisco",
@@ -53,7 +55,8 @@ class OrderRequests {
             }
         }).then( (response) => {
             cy.wrap(response.body.id).as('orderId')
-            // cy.log(response.status);  
+            cy.log(`Status code: ${response.status}`); 
+            cy.log(`Coupon ID: ${response.body.id}`);   
         });
     }
 
@@ -62,19 +65,18 @@ class OrderRequests {
 
             cy.request({
                 method: 'DELETE',
-                url: `http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/${orderId}?force=true`,
+                url: `/wp-json/wc/v3/orders/${orderId}?force=true`,
                 auth: {
                     username: 'automation',
                     password: 'automation'
                 }
                 
-            });
-            // .then( (response) => {
-            //     cy.wrap(response.body.id).as(couponId)
-            // })
+            }).then( (response) => {
+                cy.log(`Status code: ${response.status}`);  
+            })
         });
     }
 
 }
 
-export const OrderAPIRequest = OrderRequests();
+export const OrderRequests = OrderAPIRequest();

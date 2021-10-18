@@ -1,26 +1,28 @@
 class CouponAPIRequests {
 
-    create() {
+    couponId;
 
+    create() {
         cy.request({
             method: 'POST',
-            url: 'http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/', // baseUrl is prepended to url
+            url: '/wp-json/wc/v3/coupons', // baseUrl is prepended to url
+            form: true,
             auth: {
                 username: 'automation',
                 password: 'automation'
             },
-            // form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
             body: {
-                code: "ssibaja_10off",
+                code: `SSIBAJA_10off_${Date.now()}` ,
                 discount_type: "percent",
                 amount: "10",
                 individual_use: true,
                 exclude_sale_items: true,
                 minimum_amount: "100.00"
             }
-        }).then( (response) => {
+        }).then((response) => {
             cy.wrap(response.body.id).as('couponId')
-            cy.log(response.status);  
+            cy.log(`Status code: ${response.status}`); 
+            cy.log(`Coupon ID: ${response.body.id}`); 
         });
     }
 
@@ -29,16 +31,14 @@ class CouponAPIRequests {
 
             cy.request({
                 method: 'DELETE',
-                url: `http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/${couponId}?force=true`,
+                url: `/wp-json/wc/v3/coupons/${couponId}?force=true`,
                 auth: {
                     username: 'automation',
                     password: 'automation'
                 }
-                
-            });
-            // .then( (response) => {
-            //     cy.wrap(response.body.id).as(couponId)
-            // })
+            }).then( (response) => {
+                cy.log(`Status code: ${response.status}`);  
+            })
         });
     }
 }
