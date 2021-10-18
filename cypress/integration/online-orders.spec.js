@@ -22,12 +22,12 @@ describe ('Online orders', () => {
     //     }
 
     before('Create coupon', () => {
-        // CouponRequests.create();
+        CouponRequests.create();
         OrderRequests.create();
     });
 
     after('Delete coupon', () => {
-        // CouponRequests.delete();
+        CouponRequests.delete();
         OrderRequests.delete();
     });
 
