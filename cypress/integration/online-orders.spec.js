@@ -1,30 +1,68 @@
 /// <reference types="cypress" />
 
-import { ProductDetailPage } from '../page-objects/pages/product-detail';
-import { CartPage } from '../page-objects/pages/cart';
-import { SearchBoxComponent } from '../page-objects/components/search-box';
-import { CheckoutDetailsPage } from '../page-objects/pages/checkout-details';
+import { OrderReceivedPage } from '../page-objects/pages/order-received';
+
 import { CouponRequests } from '../support/coupon-api-requests';
 import { OrderRequests } from '../support/order-api-requests';
 
-import faker from 'faker';
 
 describe ('Online orders', () => {
 
-    // let coupon = {
-    //         code: "SSIBAJA_10off",  
-    //         discount_type: "percent",
-    //         amount: "10",
-    //         individual_use: true,
-    //         exclude_sale_items: true
-    //     }
+    let couponDetails = {
+        code: `SSIBAJA_10off_${Date.now()}` ,
+        discount_type: "percent",
+        amount: "10",
+        individual_use: true,
+        exclude_sale_items: true,
+        minimum_amount: "100.00"
+    }
 
-    let couponId;
-    let orderId;
+    let orderDetails = {
+        paymentMethod: "bacs",
+        paymentMethodTitle: "Direct Bank Transfer",
+        setPaid: true,
+        billing: {
+            firstName: "SONIA",
+            lastName: "SIBAJA",
+            address1: "969 Market",
+            address2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US",
+            email: `ssibajav${Date.now()}@gmail.com`,
+            phone: "(555) 555-5555"
+        },
+        shipping: {
+            firstName: "SONIA",
+            lastName: "SIBAJA",
+            address1: "969 Market",
+            address2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US"
+        },
+        lineItem: {
+            productId: 93,
+            quantity: 2
+        },
+        shippingLine:{
+            methodId: "flat_rate",
+            methodTitle: "Flat Rate",
+            total: "10.00"
+        }
+    }
+    
+    // let couponId;
+    // let orderId;
 
     before('Create coupon', () => {
-        CouponRequests.create();
-        OrderRequests.create();
+        CouponRequests.create(couponDetails);
+        CouponRequests.get();
+
+        OrderRequests.create(orderDetails);
+        OrderRequests.get();
     });
 
     after('Delete coupon', () => {
@@ -32,56 +70,23 @@ describe ('Online orders', () => {
         OrderRequests.delete();
     });
 
-    it('should checkout order', () => {
+    it('should request coupon', () => {
 
         cy.visit('/');
     
     });
 
-    // it('should add to cart', () => {
+    it('should request product', () => {
 
-    //     cy.visit('/');
-
-    //     // Search for product
-    //     // SearchBoxComponent.elements.input().type('Belt{enter}');
-    //     SearchBoxComponent.searchText('Belt');
- 
-    //     // Product details page
-    //     ProductDetailPage.elements.addToCart().click();
-    //     ProductDetailPage.elements.addedMessage().should('be.visible');
-    //     ProductDetailPage.elements.viewCart().click();
-
-    //     // Cart page
-    //     cy.url().should('include','/cart');
-    //     cy.title().should('include', 'Cart');
-    //     CartPage.elements.belt().should('be.visible');
-    //     CartPage.elements.subtotal().should('be.visible');
-    //     CartPage.elements.proceedToCheckout().click();
-
-    // });
-
-    // it('should checkout order', () => {
-
-    //     //Checkout page
-    //     cy.url().should('include','/checkout');
+        cy.visit('/');
     
-    //     // CheckoutDetailsPage.fillBillingDetails(faker.name.firstName(), faker.name.lastName(),'Costa Rica', faker.address.streetAddress(),
-    //     //                                     faker.address.secondaryAddress(), faker.address.city(), faker.address.state(), faker.address.zipCode(),
-    //     //                                     faker.phone.phoneNumber("(###)########"), faker.internet.email());
-    //     CheckoutDetailsPage.fillBillingDetails(faker.name.firstName(), faker.name.lastName(),'Costa Rica', faker.address.streetAddress(),
-    //                                         faker.address.secondaryAddress(), faker.address.city(), faker.address.state(), faker.address.zipCode(),
-    //                                         faker.phone.phoneNumber("(###)########"), `ssibajav${Date.now()}@mail.com`);
-    //     CheckoutDetailsPage.fillShippingDetails(faker.name.firstName(), faker.name.lastName(), 'UnitedStatus (US)', faker.address.streetAddress(), 
-    //                                         faker.address.secondaryAddress(), 'Austin', 'Texas', faker.address.zipCode(), 'faker.lorem.sentence()');
-        
-    // });
+    });
 
-    // it('should place order', () => {
+    it('should display proper discount value', (orderId, orderKey) => {
 
-    //     //Checkout page
-    //     CheckoutDetailsPage.elements.termsAndConditionsCheckBox().check();
-    //     CheckoutDetailsPage.elements.placeOrderButton().click();
-    //     CheckoutDetailsPage.elements.orderReceivedMessage().should('be.visible');
-    // });
+        cy.visit(`${OrderReceivedPage.url()}/${orderId}/?key=${orderKey}`);
+        // http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/checkout/order-received/796/?key=wc_order_S0xq5kj1CSk1r
+    
+    });
 
 })

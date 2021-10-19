@@ -2,7 +2,7 @@ class OrderAPIRequest {
 
     orderId;
 
-    create() {
+    create(orderDetails) {
         cy.request({
             method: 'POST',
             url: '/wp-json/wc/v3/orders', // baseUrl is prepended to url
@@ -12,44 +12,44 @@ class OrderAPIRequest {
             },
             form: true,
             body: {
-                payment_method: "bacs",
-                payment_method_title: "Direct Bank Transfer",
-                set_paid: true,
+                payment_method: orderDetails.paymentMethod(),
+                payment_method_title: orderDetails.paymentMethodTitle(),
+                set_paid: orderDetails.setPaid(),
                 billing: {
-                    first_name: "SONIA",
-                    last_name: "SIBAJA",
-                    address_1: "969 Market",
+                    first_name: orderDetails.billing.firstName(),
+                    last_name: orderDetails.billing.lastName(),
+                    address_1: orderDetails.billing.address1(),
                     address_2: "",
-                    city: "San Francisco",
-                    state: "CA",
-                    postcode: "94103",
-                    country: "US",
-                    email: `ssibajav${Date.now()}@gmail.com`,
-                    phone: "(555) 555-5555"
+                    city: orderDetails.billing.city(),
+                    state: orderDetails.billing.state(),
+                    postcode: orderDetails.billing.postcode(),
+                    country: orderDetails.billing.country(),
+                    email: orderDetails.billing.email(),
+                    phone: orderDetails.billing.phone()
                 },
                 shipping: 
                 {
-                    first_name: "SONIA",
-                    last_name: "SIBAJA",
-                    address_1: "969 Market",
+                    first_name: orderDetails.shipping.firsNname(),
+                    last_name: orderDetails.shipping.lastName(),
+                    address_1: orderDetails.shipping.address1(),
                     address_2: "",
-                    city: "San Francisco",
-                    state: "CA",
-                    postcode: "94103",
-                    country: "US"
+                    city: orderDetails.shipping.city(),
+                    state: orderDetails.shipping.state(),
+                    postcode: orderDetails.shipping.postcode(),
+                    country: orderDetails.shipping.country(),
                 },
                 line_items: [
-                {
-                    product_id: 93,
-                    quantity: 2
-                }
+                    {
+                        product_id: orderDetails.lineItem.productId(),
+                        quantity: orderDetails.lineItem.quantity()
+                    }
                 ],
                 shipping_lines: [
-                {
-                    method_id: "flat_rate",
-                    method_title: "Flat Rate",
-                    total: "10.00"
-                }
+                    {
+                        method_id: orderDetails.shippingLines.methodId(),
+                        method_title: orderDetails.shippingLines.methodTitle,
+                        total: orderDetails.shippingLines.total()
+                    }
                 ]
             }
         }).then( (response) => {
@@ -75,6 +75,25 @@ class OrderAPIRequest {
             })
         });
     }
+
+    get() {
+        cy.get('@orderId').then( (orderId) => {
+
+            cy.request({
+                method: 'GET',
+                url: `/wp-json/wc/v3/orders/${orderId}`,
+                auth: {
+                    username: 'automation',
+                    password: 'automation'
+                }
+                
+            }).then( (response) => {
+                cy.log(`Status code: ${response.status}`);  
+                cy.log(`Order ID: ${response.body.id}`);  
+            })
+        });
+    }
+
 }
 
 export const OrderRequests = new OrderAPIRequest();
