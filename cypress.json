@@ -1,3 +1,6 @@
 {
-    "baseUrl":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/"
+    "baseUrl":"http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/",
+    "coupon_url":"wp-json/wc/v3/coupons",
+    "orders_url":"wp-json/wc/v3/orders",
+    "products_url":"wp-json/wc/v3/products"
 }
