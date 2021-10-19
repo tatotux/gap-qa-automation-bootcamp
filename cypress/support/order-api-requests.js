@@ -1,9 +1,8 @@
 class OrderAPIRequest {
 
+    orderId;
+
     create() {
-
-        orderId;
-
         cy.request({
             method: 'POST',
             url: '/wp-json/wc/v3/orders', // baseUrl is prepended to url
@@ -76,7 +75,6 @@ class OrderAPIRequest {
             })
         });
     }
-
 }
 
-export const OrderRequests = OrderAPIRequest();
+export const OrderRequests = new OrderAPIRequest();

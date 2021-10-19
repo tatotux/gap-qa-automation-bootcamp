@@ -6,11 +6,8 @@ import { SearchBoxComponent } from '../page-objects/components/search-box';
 import { CheckoutDetailsPage } from '../page-objects/pages/checkout-details';
 import { CouponRequests } from '../support/coupon-api-requests';
 import { OrderRequests } from '../support/order-api-requests';
-import * as _ from 'lodash';
 
 import faker from 'faker';
-import { orderBy } from 'cypress/types/lodash';
-
 
 describe ('Online orders', () => {
 
@@ -21,6 +18,9 @@ describe ('Online orders', () => {
     //         individual_use: true,
     //         exclude_sale_items: true
     //     }
+
+    let couponId;
+    let orderId;
 
     before('Create coupon', () => {
         CouponRequests.create();

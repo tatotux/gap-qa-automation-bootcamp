@@ -1,7 +1,7 @@
 class CouponAPIRequests {
 
     couponId;
-
+    
     create() {
         cy.request({
             method: 'POST',
