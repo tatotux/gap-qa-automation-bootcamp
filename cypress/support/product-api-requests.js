@@ -76,4 +76,4 @@ class ProductAPIRequests {
 
 }
 
-export const ProductRequests = new class ProductAPIRequests();
+export const ProductRequests = new ProductAPIRequests();
