@@ -1,0 +1,24 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "Working in a final API Cypress Homework",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^8.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/euribes/gap-qa-automation-bootcamp.git"
+  },
+  "author": "Antonio Ledezma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/euribes/gap-qa-automation-bootcamp/issues"
+  },
+  "homepage": "https://github.com/euribes/gap-qa-automation-bootcamp#readme"
+}
