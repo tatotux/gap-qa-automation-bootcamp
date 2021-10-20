@@ -4,70 +4,28 @@ import { OrderReceivedPage } from '../page-objects/pages/order-received';
 
 import { CouponRequests } from '../support/coupon-api-requests';
 import { OrderRequests } from '../support/order-api-requests';
-
+import { ProductRequests } from '../support/product-api-requests';
 
 describe ('Online orders', () => {
 
-    let couponDetails = {
-        code: `SSIBAJA_10off_${Date.now()}` ,
-        discount_type: "percent",
-        amount: "10",
-        individual_use: true,
-        exclude_sale_items: true,
-        minimum_amount: "100.00"
-    }
-
-    let orderDetails = {
-        paymentMethod: "bacs",
-        paymentMethodTitle: "Direct Bank Transfer",
-        setPaid: true,
-        billing: {
-            firstName: "SONIA",
-            lastName: "SIBAJA",
-            address1: "969 Market",
-            address2: "",
-            city: "San Francisco",
-            state: "CA",
-            postcode: "94103",
-            country: "US",
-            email: `ssibajav${Date.now()}@gmail.com`,
-            phone: "(555) 555-5555"
-        },
-        shipping: {
-            firstName: "SONIA",
-            lastName: "SIBAJA",
-            address1: "969 Market",
-            address2: "",
-            city: "San Francisco",
-            state: "CA",
-            postcode: "94103",
-            country: "US"
-        },
-        lineItem: {
-            productId: 93,
-            quantity: 2
-        },
-        shippingLine:{
-            methodId: "flat_rate",
-            methodTitle: "Flat Rate",
-            total: "10.00"
-        }
-    }
-    
-    // let couponId;
-    // let orderId;
-
     before('Create coupon', () => {
-        CouponRequests.create(couponDetails);
+        CouponRequests.create();
         CouponRequests.get();
+        
+        ProductRequests.create();
+        ProductRequests.get();
 
-        OrderRequests.create(orderDetails);
+        OrderRequests.create(cy.get('@productId'), cy.get('@couponId'));        
         OrderRequests.get();
+
     });
 
     after('Delete coupon', () => {
-        CouponRequests.delete();
+        ProductRequests.delete();
         OrderRequests.delete();
+        CouponRequests.delete();
+        
+
     });
 
     it('should request coupon', () => {
@@ -76,17 +34,18 @@ describe ('Online orders', () => {
     
     });
 
-    it('should request product', () => {
+    // it('should request product', () => {
 
-        cy.visit('/');
+    //     cy.visit('/');
     
-    });
+    // });
 
-    it('should display proper discount value', (orderId, orderKey) => {
+    // it('should display proper discount value', (orderId, orderKey) => {
 
-        cy.visit(`${OrderReceivedPage.url()}/${orderId}/?key=${orderKey}`);
-        // http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/checkout/order-received/796/?key=wc_order_S0xq5kj1CSk1r
+    //     cy.visit('/');
+    //     // cy.visit(`${OrderReceivedPage.url()}/${orderId}/?key=${orderKey}`);
+    //     // http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/checkout/order-received/796/?key=wc_order_S0xq5kj1CSk1r
     
-    });
+    // });
 
 })

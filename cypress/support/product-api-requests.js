@@ -12,25 +12,14 @@ class ProductAPIRequests {
                 password: 'automation'
             },
             body: {
-                name: "ANAKIN t-shirt",
+                name: `ANAKIN t-shirt ${Date.now()}`,
                 type: "simple",
                 regular_price: "35",
                 description: "ANAKIN cool t-shirt. 100% Cotton",
-                short_description: "NAKIN cool t-shirt",
+                short_description: "ANAKIN cool t-shirt",
                 categories: [
                     {
-                    id: 9
-                    },
-                    {
-                    id: 14
-                    }
-                ],
-                images: [
-                    {
-                    src: "http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_2_front.jpg"
-                    },
-                    {
-                    src: "http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_2_back.jpg"
+                        id: 18
                     }
                 ]
             }

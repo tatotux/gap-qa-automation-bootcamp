@@ -2,7 +2,7 @@ class CouponAPIRequests {
 
     couponId;
 
-    create(coupon) {
+    create() {
         cy.request({
             method: 'POST',
             url: '/wp-json/wc/v3/coupons', // baseUrl is prepended to url
@@ -12,12 +12,13 @@ class CouponAPIRequests {
                 password: 'automation'
             },
             body: {
-                code: coupon.code() ,
-                discount_type: coupon.discount_type(),
-                amount: coupon.amount(),
-                individual_use: coupon.individual_use(),
-                exclude_sale_items: coupon.exclude_sale_items(),
-                minimum_amount: coupon.minimum_amount()
+                code: `SSIBAJA_10off_${Date.now()}`,
+                discount_type: "percent",
+                amount: "10",
+                individual_use: true,
+                exclude_sale_items: true,
+                minimum_amount: "100.00"
+
             }
         }).then((response) => {
             cy.wrap(response.body.id).as('couponId');
@@ -54,8 +55,7 @@ class CouponAPIRequests {
                 }
             }).then( (response) => {
                 cy.log(`Status code: ${response.status}`); 
-                cy.log(`Coupon ID: ${response.body.id}`);  
- 
+                cy.log(`Coupon ID: ${response.body.id}`);
             })
         });
     }

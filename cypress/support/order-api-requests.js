@@ -2,7 +2,7 @@ class OrderAPIRequest {
 
     orderId;
 
-    create(orderDetails) {
+    create(productId, couponId) {
         cy.request({
             method: 'POST',
             url: '/wp-json/wc/v3/orders', // baseUrl is prepended to url
@@ -12,48 +12,53 @@ class OrderAPIRequest {
             },
             form: true,
             body: {
-                payment_method: orderDetails.paymentMethod(),
-                payment_method_title: orderDetails.paymentMethodTitle(),
-                set_paid: orderDetails.setPaid(),
+                payment_method: "bacs",
+                payment_method_title: "Direct Bank Transfer",
+                set_paid: true,
                 billing: {
-                    first_name: orderDetails.billing.firstName(),
-                    last_name: orderDetails.billing.lastName(),
-                    address_1: orderDetails.billing.address1(),
+                    first_name: "SONIA",
+                    last_name: "SIBAJA",
+                    address_1: "A13 Senderos",
                     address_2: "",
-                    city: orderDetails.billing.city(),
-                    state: orderDetails.billing.state(),
-                    postcode: orderDetails.billing.postcode(),
-                    country: orderDetails.billing.country(),
-                    email: orderDetails.billing.email(),
-                    phone: orderDetails.billing.phone()
+                    city: "San Francisco",
+                    state: "CA",
+                    postcode: "94103",
+                    country: "US",
+                    email: `ssibajav${Date.now()}@gmail.com`,
+                    phone: "(555) 555-5555"
                 },
                 shipping: 
                 {
-                    first_name: orderDetails.shipping.firsNname(),
-                    last_name: orderDetails.shipping.lastName(),
-                    address_1: orderDetails.shipping.address1(),
+                    first_name: "SONIA",
+                    last_name: "SIBAJA",
+                    address_1: "A13 Senderos",
                     address_2: "",
-                    city: orderDetails.shipping.city(),
-                    state: orderDetails.shipping.state(),
-                    postcode: orderDetails.shipping.postcode(),
-                    country: orderDetails.shipping.country(),
+                    city: "San Francisco",
+                    state: "CA",
+                    postcode: "94103",
+                    country: "US",
                 },
                 line_items: [
                     {
-                        product_id: orderDetails.lineItem.productId(),
-                        quantity: orderDetails.lineItem.quantity()
+                        product_id: productId,
+                        quantity: 4
                     }
                 ],
                 shipping_lines: [
                     {
-                        method_id: orderDetails.shippingLines.methodId(),
-                        method_title: orderDetails.shippingLines.methodTitle,
-                        total: orderDetails.shippingLines.total()
+                        method_id: "flat_rate",
+                        method_title: "Flat Rate",
+                        total: "10"
+                    }
+                ],
+                coupon_lines: [
+                    {
+                        code: couponId
                     }
                 ]
             }
         }).then( (response) => {
-            cy.wrap(response.body.id).as('orderId')
+            cy.wrap(response.body.id).as('orderId');
             cy.log(`Status code: ${response.status}`); 
             cy.log(`Coupon ID: ${response.body.id}`);   
         });
