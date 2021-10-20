@@ -24,13 +24,13 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('createCoupon', (username, pass, code) => {
+Cypress.Commands.add('createCoupon', (code) => {
     cy.request({
             method: 'POST',
             url: Cypress.config("baseUrl") + Cypress.config("coupon_url"),
             auth: {
-                username: username,
-                password: pass
+                username: Cypress.env("api_username"),
+                password: Cypress.env("api_password")
             },
             body: {
                 code: code,
@@ -43,49 +43,50 @@ Cypress.Commands.add('createCoupon', (username, pass, code) => {
             expect(resp.status).eq(201)
             return resp.body.id
         })
-})
+    })
+
+Cypress.Commands.add('getCoupon', (couponId) => {
+        cy.request({
+                method: 'GET',
+                url: Cypress.config("baseUrl") + Cypress.config("coupon_url") + `/${couponId}`,
+                auth: {
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
+                },
+            })
+            .then((resp) => {
+                expect(resp.status).eq(200)
+                return resp.body
+            })
+    })
+
+Cypress.Commands.add('deleteCoupon', (couponId) => {
+        cy.request({
+                method: 'DELETE',
+                url: Cypress.config("baseUrl") + Cypress.config("coupon_url") + `/${couponId}`,
+                auth: {
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
+                },
+                body: {
+                    force: true
+                },
+            })
+            .then((resp) => {
+                expect(resp.status).eq(200)
+            })
+    })
 
 
-Cypress.Commands.add('getCoupon', (username, pass, couponId) => {
-    cy.request({
-            method: 'GET',
-            url: Cypress.config("baseUrl") + Cypress.config("coupon_url") + `/${couponId}`,
-            auth: {
-                username: username,
-                password: pass
-            },
-        })
-        .then((resp) => {
-            expect(resp.status).eq(200)
-            return resp.body.id
-        })
-})
-
-Cypress.Commands.add('deleteCoupon', (username, pass, couponId) => {
-    cy.request({
-            method: 'DELETE',
-            url: Cypress.config("baseUrl") + Cypress.config("coupon_url") + `/${couponId}`,
-            auth: {
-                username: username,
-                password: pass
-            },
-            body: {
-                force: true
-            },
-        })
-        .then((resp) => {
-            expect(resp.status).eq(200)
-        })
-})
 
 
-Cypress.Commands.add('getAllProducts', (username, pass) => {
+Cypress.Commands.add('getAllProducts', () => {
     cy.request({
             method: 'GET',
             url: Cypress.config("baseUrl") + Cypress.config("products_url"),
             auth: {
-                username: username,
-                password: pass
+                username: Cypress.env("api_username"),
+                password: Cypress.env("api_password")
             },
         })
         .then((resp) => {
@@ -94,14 +95,30 @@ Cypress.Commands.add('getAllProducts', (username, pass) => {
         })
 })
 
+Cypress.Commands.add('getProduct', (productId) => {
+    cy.request({
+            method: 'GET',
+            url: Cypress.config("baseUrl") + Cypress.config("products_url")+`/${productId}`,
+            auth: {
+                username: Cypress.env("api_username"),
+                password: Cypress.env("api_password")
+            },
+        })
+        .then((resp) => {            
+            expect(resp.status).eq(200)
+            return resp.body
+        })
+})
 
-Cypress.Commands.add('createOrder', (username, pass, productId,couponCode) => {
+
+
+Cypress.Commands.add('createOrder', (productId,couponCode) => {
     cy.request({
             method: 'POST',
             url: Cypress.config("baseUrl") + Cypress.config("orders_url"),
             auth: {
-                username: username,
-                password: pass
+                username: Cypress.env("api_username"),
+                password: Cypress.env("api_password")
             },
             body: {
                 payment_method: "bacs",
@@ -147,5 +164,19 @@ Cypress.Commands.add('createOrder', (username, pass, productId,couponCode) => {
         .then((resp) => {
             expect(resp.status).eq(201)
             return resp.body.id
+        })
+})
+
+Cypress.Commands.add('deleteOrder', (orderId) => {
+    cy.request({
+            method: 'POST',
+            url: Cypress.config("baseUrl") + Cypress.config("orders_url")+`/${orderId}`,
+            auth: {
+                username: Cypress.env("api_username"),
+                password: Cypress.env("api_password")
+            },              
+        })
+        .then((resp) => {
+            expect(resp.status).eq(200)
         })
 })

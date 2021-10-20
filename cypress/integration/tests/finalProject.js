@@ -1,25 +1,57 @@
 /// <reference types="Cypress" />
 
-context('Testing Playground',() =>{
-    describe('The Challenge - Final Project',()=>{
-        let couponCode = `cuponOff${Math.floor(Math.random() * 10000)}`;
+
+context('Testing Playground', () => {
+    describe('The Challenge - Final Project', () => {
+        let couponCode = `cuponOff${Math.floor(Math.random() * 10000000)}`;
         let couponId;
-        before(()=>{
-            
-            cy.createCoupon('automation','automation',couponCode).then((id)=>{ 
-                couponId = id 
-                cy.getCoupon('automation','automation',couponId)
-            })          
-                            
-            //cy.visit("");           
+        let productsList;
+        let orderId;       
+
+        before('Set Up', () => {            
+            cy.getAllProducts().then((products) => { productsList = products })
+            cy.createCoupon(couponCode).then((id) => { 
+                couponId = id
+                cy.createOrder(productsList[0].id, couponCode).then((order) => { orderId = order})
+            })           
         })
 
-        it('E2E - Verify a full order process',()=>{
-            cy.getAllProducts('automation','automation').then((productsList)=>{
-                cy.createOrder('automation','automation',productsList[0].id,couponCode)
+        after('TearDown / Clean up', () => {
+            cy.deleteCoupon(couponId)
+            cy.deleteOrder(orderId)
+            
+        })
+
+
+        it('API - A specific product can be requested', () => {  
+            //PLEASE REMOVE 'productsList[0].id' in case you want to use a specific product id already existing on DB         
+                cy.getProduct(productsList[0].id).then((productInfo) =>{ 
+                    expect(productInfo).not.empty
+                    expect(productInfo.id).eq(productsList[0].id)
+                })            
+        })
+
+
+        it('API - A specific coupon can be requested', () => {
+            cy.getCoupon(couponId).then((coupon) =>{
+                expect(coupon.id).eq(couponId)
+                expect(coupon.code).eq(couponCode.toLowerCase())
+                expect(coupon.amount).eq("25.00")
+                expect(coupon.description).eq("Cupon used on final project - Jose Garcia")
+            })
+        })
+
+
+        
+
+
+        /*it('UI Testing - Verify the order shows the proper discount value', () => {
+            cy.getAllProducts().then((productsList) => {
+                cy.getProduct(productsList[0].id)
+                cy.createOrder(productsList[0].id, couponCode)
             })
 
-        })       
+        })*/
         /*it('E2E - Verify a full order process',()=>{
             const item = "Belt"
             cy.get(homePage.elements.search).should('be.visible').type(`${item} {enter}`);
@@ -37,9 +69,7 @@ context('Testing Playground',() =>{
             cy.get(checkoutPage.elements.title).should('be.visible').contains("Order received");            
         })*/
 
-        after(()=>{              
-            cy.deleteCoupon('automation','automation',couponId)        
-        })
+
 
     })
 
