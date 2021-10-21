@@ -8,8 +8,8 @@ class ProductAPIRequests {
             url: '/wp-json/wc/v3/products', // baseUrl is prepended to url
             form: true,
             auth: {
-                username: 'automation',
-                password: 'automation'
+                username: Cypress.env("api_username"),
+                password: Cypress.env("api_password")
             },
             body: {
                 name: `ANAKIN t-shirt ${Date.now()}`,
@@ -37,8 +37,8 @@ class ProductAPIRequests {
                 method: 'DELETE',
                 url: `/wp-json/wc/v3/products/${productId}?force=true`,
                 auth: {
-                    username: 'automation',
-                    password: 'automation'
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
                 }
             }).then( (response) => {
                 cy.log(`Status code: ${response.status}`);  
@@ -53,12 +53,13 @@ class ProductAPIRequests {
                 method: 'GET',
                 url: `/wp-json/wc/v3/products/${productId}`,
                 auth: {
-                    username: 'automation',
-                    password: 'automation'
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
                 }
             }).then( (response) => {
                 cy.log(`Status code: ${response.status}`); 
                 cy.log(`Product ID: ${response.body.id}`);  
+                cy.wrap(response.status).as('productStatusCode');
             })
         });
     }

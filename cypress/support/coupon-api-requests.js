@@ -8,8 +8,8 @@ class CouponAPIRequests {
             url: '/wp-json/wc/v3/coupons', // baseUrl is prepended to url
             form: true,
             auth: {
-                username: 'automation',
-                password: 'automation'
+                username: Cypress.env("api_username"),
+                password: Cypress.env("api_password")
             },
             body: {
                 code: `SSIBAJA_10off_${Date.now()}`,
@@ -37,8 +37,8 @@ class CouponAPIRequests {
                 method: 'DELETE',
                 url: `/wp-json/wc/v3/coupons/${couponId}?force=true`,
                 auth: {
-                    username: 'automation',
-                    password: 'automation'
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
                 }
             }).then( (response) => {
                 cy.log(`Status code: ${response.status}`);  
@@ -53,12 +53,13 @@ class CouponAPIRequests {
                 method: 'GET',
                 url: `/wp-json/wc/v3/coupons/${couponId}`,
                 auth: {
-                    username: 'automation',
-                    password: 'automation'
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
                 }
             }).then( (response) => {
                 cy.log(`Status code: ${response.status}`); 
                 cy.log(`Coupon ID: ${response.body.id}`);
+                cy.wrap(response.status).as('couponStatusCode');
             })
         });
     }

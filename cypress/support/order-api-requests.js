@@ -2,16 +2,22 @@ class OrderAPIRequest {
 
     orderId;
     orderKey;
+    
 
     create() {
+        let productId;
+        cy.get('@productId').then(val => {
+            productId = val;          
+        });
+
         cy.get('@couponCode').then((couponCode) => {
 
             cy.request({
                 method: 'POST',
                 url: '/wp-json/wc/v3/orders', // baseUrl is prepended to url
                 auth: {
-                    username: 'automation',
-                    password: 'automation'
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
                 },
                 form: true,
                 body: {
@@ -43,7 +49,7 @@ class OrderAPIRequest {
                     },
                     line_items: [
                         {
-                            product_id: 1109,  //hay un problema con el product ID revisar cómo se genera
+                            product_id: productId, //1109, 
                             quantity: 4
                         }
                     ],
@@ -73,14 +79,14 @@ class OrderAPIRequest {
     }
 
     delete() {
-        cy.get('@orderId').then( (orderId) => {
+        cy.get('@orderId').then((orderId) => {
 
             cy.request({
                 method: 'DELETE',
                 url: `/wp-json/wc/v3/orders/${orderId}?force=true`,
                 auth: {
-                    username: 'automation',
-                    password: 'automation'
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
                 }
                 
             }).then( (response) => {
@@ -90,14 +96,14 @@ class OrderAPIRequest {
     }
 
     get() {
-        cy.get('@orderId').then( (orderId) => {
+        cy.get('@orderId').then((orderId) => {
 
             cy.request({
                 method: 'GET',
                 url: `/wp-json/wc/v3/orders/${orderId}`,
                 auth: {
-                    username: 'automation',
-                    password: 'automation'
+                    username: Cypress.env("api_username"),
+                    password: Cypress.env("api_password")
                 }
                 
             }).then( (response) => {

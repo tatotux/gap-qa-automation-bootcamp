@@ -6,32 +6,32 @@ import { CouponRequests } from '../support/coupon-api-requests';
 import { OrderRequests } from '../support/order-api-requests';
 import { ProductRequests } from '../support/product-api-requests';
 
-let couponId;
-let couponCode
-let productId;
-let orderId;
-let orderKey;
-let discountTotal;
-
 describe ('Online orders', () => {
 
-    before('Create coupon, product and order for tests', () => {
+    let couponId;
+    let couponCode
+    let couponStatusCode;
+
+    let productId;
+    let productStatusCode;
+
+    let orderId;
+    let orderKey;
+    let discountTotal;
+
+    beforeEach('Create coupon, product and order for tests', () => {
 
         //  COUPON
         CouponRequests.create();
-        CouponRequests.get();
-        
         cy.get('@couponId').then(val => {
             couponId = val;          
         })
-
         cy.get('@couponCode').then(val => {
             couponCode = val;
         })
     
         //  PRODUCT 
         ProductRequests.create();
-        ProductRequests.get();
         cy.get('@productId').then(val => {
             productId = val;          
         })
@@ -40,45 +40,43 @@ describe ('Online orders', () => {
         //    ORDER 
         cy.log(" ===============================    ORDER   ==========================");
         OrderRequests.create();        
-        OrderRequests.get();
-
         cy.get('@orderId').then(val => {
             orderId = val;          
         });
-
         cy.get('@orderKey').then(val => {
             orderKey = val;          
         });
-
         cy.get('@discountTotal').then(val => {
             discountTotal = val;          
         });
 
     });
 
-    after('Clean up and delete coupon, product and order for test', () => {
+    afterEach('Clean up and delete coupon, product and order for test', () => {
         ProductRequests.delete();
         OrderRequests.delete();
         CouponRequests.delete();
     });
 
-    // it('should request coupon', () => {
+    it('should request coupon', () => {
 
-    //     cy.visit('/');
+        CouponRequests.get();
+        cy.get('@couponStatusCode').should('eq', '200');
     
-    // });
+    });
 
-    // it('should request product', () => {
+    it('should request product', () => {
 
-    //     cy.visit('/');
+        ProductRequests.get();
+        cy.get('@productStatusCode').should('eq', '200');
     
-    // });
+    });
 
     it('should display proper discount value', () => {
 
         cy.visit(`${OrderReceivedPage.getUrl()}/${orderId}/?key=${orderKey}`);
         OrderReceivedPage.elements.discountValue().should('be.visible');
-        OrderReceivedPage.elements.discountValue().should('equal',discountTotal);
+        OrderReceivedPage.elements.discountValue().should('contain', discountTotal);
     });
 
 })

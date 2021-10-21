@@ -3,8 +3,7 @@ class OrderReceived {
     url = '/checkout/order-received';
 
     elements = {
-        // discountValue: () => cy.contains('span.woocommerce-Price-amount.amountt'),
-        discountValue: () => cy.get('span.woocommerce-Price-amount.amountt'),
+        discountValue: () => cy.get('tfoot>tr:nth-child(2)>td>span.woocommerce-Price-amount.amount'),
     }
 
     getUrl(){
