@@ -7,14 +7,16 @@ context('Testing Playground', () => {
         let coupon_code = `cuponOff${Math.floor(Math.random() * 10000000)}`;
         let coupon_percentaje = 25;
         let coupon_id;
-        
+
 
         before('Set Up', () => {
-            couponRequests.createCoupon(coupon_code, coupon_percentaje.toString()).then((id) => { coupon_id = id });
+            couponRequests.createCoupon(coupon_code, coupon_percentaje.toString()).then((id) => {
+                coupon_id = id
+            });
         })
 
-        after('TearDown / Clean up', () => {           
-            couponRequests.deleteCoupon(coupon_id);            
+        after('TearDown / Clean up', () => {
+            couponRequests.deleteCoupon(coupon_id);
         })
 
         it('API - A specific coupon can be requested', () => {

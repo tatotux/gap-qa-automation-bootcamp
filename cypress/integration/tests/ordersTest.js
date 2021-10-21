@@ -15,12 +15,14 @@ context('Testing Playground', () => {
         let product_price;
 
         before('Set Up', () => {
-            productsRequests.getAllProducts().then((products) => { products_list = products });
+            productsRequests.getAllProducts().then((products) => {
+                products_list = products
+            });
             couponRequests.createCoupon(coupon_code, coupon_percentaje.toString()).then((id) => {
                 coupon_id = id;
                 product_price = products_list[0].regular_price;
-                ordersRequests.createOrder(products_list[0].id, coupon_code).then((order) => { 
-                    order_id = order.id                    
+                ordersRequests.createOrder(products_list[0].id, coupon_code).then((order) => {
+                    order_id = order.id
                 })
             });
         })
@@ -28,7 +30,7 @@ context('Testing Playground', () => {
         after('TearDown / Clean up', () => {
             ordersRequests.deleteOrder(order_id);
             couponRequests.deleteCoupon(coupon_id);
-            
+
         })
 
         it('API - A specific product can be requested', () => {
@@ -37,7 +39,7 @@ context('Testing Playground', () => {
                 expect(productInfo).not.empty;
                 expect(productInfo.id).eq(products_list[0].id);
             });
-        }) 
+        })
 
     })
 

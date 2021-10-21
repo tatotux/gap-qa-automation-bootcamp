@@ -16,11 +16,13 @@ context('Testing Playground', () => {
         let product_price;
 
         before('Set Up', () => {
-            productsRequests.getAllProducts().then((products) => { products_list = products });
+            productsRequests.getAllProducts().then((products) => {
+                products_list = products
+            });
             couponRequests.createCoupon(coupon_code, coupon_percentaje.toString()).then((id) => {
                 coupon_id = id;
                 product_price = products_list[0].regular_price;
-                ordersRequests.createOrder(products_list[0].id, coupon_code).then((order) => {                     
+                ordersRequests.createOrder(products_list[0].id, coupon_code).then((order) => {
                     order_id = order.id
                     order_key = order.order_key
                 })
@@ -30,16 +32,14 @@ context('Testing Playground', () => {
         after('TearDown / Clean up', () => {
             ordersRequests.deleteOrder(order_id);
             couponRequests.deleteCoupon(coupon_id);
-            
-        })        
+        })
 
         it('UI Testing - Verify the order shows the proper discount value', () => {
             let discount;
-            cy.visit(`checkout/order-received/${order_id}/?key=${order_key}`);            
-            discount = parseFloat((coupon_percentaje/100) * parseFloat(product_price) ).toFixed(2);
-            cy.get(":nth-child(2) > td > .woocommerce-Price-amount").should('be.visible').last().invoke('text').should('contain',(`$${discount}`));  
+            cy.visit(`checkout/order-received/${order_id}/?key=${order_key}`);
+            discount = parseFloat((coupon_percentaje / 100) * parseFloat(product_price)).toFixed(2);
+            cy.get(":nth-child(2) > td > .woocommerce-Price-amount").should('be.visible').last().invoke('text').should('contain', (`$${discount}`));
         })
-
 
     })
 
