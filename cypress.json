@@ -1,0 +1,13 @@
+{
+    "baseUrl": "http://ec2-100-25-33-224.compute-1.amazonaws.com:8000",
+    "watchForFileChanges": false,
+    "env":{
+        "username": "automation",
+        "password": "automation",
+        "productsEndpoint": "/wp-json/wc/v3/products/",
+        "couponsEndpoint": "/wp-json/wc/v3/coupons/",
+        "ordersEndpoint": "/wp-json/wc/v3/orders",
+        "getOrderEndpoint": "checkout/order-received",
+        "addToCartEndpoint": "/?wc-ajax=add_to_cart"
+    }   
+}
