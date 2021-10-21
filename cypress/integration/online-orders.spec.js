@@ -6,33 +6,67 @@ import { CouponRequests } from '../support/coupon-api-requests';
 import { OrderRequests } from '../support/order-api-requests';
 import { ProductRequests } from '../support/product-api-requests';
 
+let couponId;
+let couponCode
+let productId;
+let orderId;
+let orderKey;
+let discountTotal;
+
 describe ('Online orders', () => {
 
-    before('Create coupon', () => {
+    before('Create coupon, product and order for tests', () => {
+
+        //  COUPON
         CouponRequests.create();
         CouponRequests.get();
         
+        cy.get('@couponId').then(val => {
+            couponId = val;          
+        })
+
+        cy.get('@couponCode').then(val => {
+            couponCode = val;
+        })
+    
+        //  PRODUCT 
         ProductRequests.create();
         ProductRequests.get();
+        cy.get('@productId').then(val => {
+            productId = val;          
+        })
 
-        OrderRequests.create(cy.get('@productId'), cy.get('@couponId'));        
+
+        //    ORDER 
+        cy.log(" ===============================    ORDER   ==========================");
+        OrderRequests.create();        
         OrderRequests.get();
+
+        cy.get('@orderId').then(val => {
+            orderId = val;          
+        });
+
+        cy.get('@orderKey').then(val => {
+            orderKey = val;          
+        });
+
+        cy.get('@discountTotal').then(val => {
+            discountTotal = val;          
+        });
 
     });
 
-    after('Delete coupon', () => {
+    after('Clean up and delete coupon, product and order for test', () => {
         ProductRequests.delete();
         OrderRequests.delete();
         CouponRequests.delete();
-        
-
     });
 
-    it('should request coupon', () => {
+    // it('should request coupon', () => {
 
-        cy.visit('/');
+    //     cy.visit('/');
     
-    });
+    // });
 
     // it('should request product', () => {
 
@@ -40,12 +74,11 @@ describe ('Online orders', () => {
     
     // });
 
-    // it('should display proper discount value', (orderId, orderKey) => {
+    it('should display proper discount value', () => {
 
-    //     cy.visit('/');
-    //     // cy.visit(`${OrderReceivedPage.url()}/${orderId}/?key=${orderKey}`);
-    //     // http://ec2-100-25-33-224.compute-1.amazonaws.com:8000/checkout/order-received/796/?key=wc_order_S0xq5kj1CSk1r
-    
-    // });
+        cy.visit(`${OrderReceivedPage.getUrl()}/${orderId}/?key=${orderKey}`);
+        OrderReceivedPage.elements.discountValue().should('be.visible');
+        OrderReceivedPage.elements.discountValue().should('equal',discountTotal);
+    });
 
 })

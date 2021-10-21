@@ -14,7 +14,7 @@ class ProductAPIRequests {
             body: {
                 name: `ANAKIN t-shirt ${Date.now()}`,
                 type: "simple",
-                regular_price: "35",
+                regular_price: "150",
                 description: "ANAKIN cool t-shirt. 100% Cotton",
                 short_description: "ANAKIN cool t-shirt",
                 categories: [

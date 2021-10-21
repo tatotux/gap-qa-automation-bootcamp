@@ -22,8 +22,11 @@ class CouponAPIRequests {
             }
         }).then((response) => {
             cy.wrap(response.body.id).as('couponId');
+            cy.wrap(response.body.code).as('couponCode');
+            
             cy.log(`Status code: ${response.status}`); 
             cy.log(`Coupon ID: ${response.body.id}`); 
+            cy.log(`Coupon Code: ${response.body.code}`); 
         });
     }
 
