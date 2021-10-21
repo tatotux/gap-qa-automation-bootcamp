@@ -7,36 +7,36 @@ export const ordersRequests = require('../../support/API_Requests/ordersRequest'
 
 context('Testing Playground', () => {
     describe('The Challenge - Final Project', () => {
-        let couponCode = `cuponOff${Math.floor(Math.random() * 10000000)}`;
-        let couponPercentaje = 25;
-        let couponId;
-        let productsList;
-        let orderId;
-        let orderKey;
-        let productPrice;
+        let coupon_code = `cuponOff${Math.floor(Math.random() * 10000000)}`;
+        let coupon_percentaje = 25;
+        let coupon_id;
+        let products_list;
+        let order_id;
+        let order_key;
+        let product_price;
 
         before('Set Up', () => {
-            productsRequests.getAllProducts().then((products) => { productsList = products });
-            couponRequests.createCoupon(couponCode, couponPercentaje.toString()).then((id) => {
-                couponId = id;
-                productPrice = productsList[0].regular_price;
-                ordersRequests.createOrder(productsList[0].id, couponCode).then((order) => {                     
-                    orderId = order.id
-                    orderKey = order.order_key
+            productsRequests.getAllProducts().then((products) => { products_list = products });
+            couponRequests.createCoupon(coupon_code, coupon_percentaje.toString()).then((id) => {
+                coupon_id = id;
+                product_price = products_list[0].regular_price;
+                ordersRequests.createOrder(products_list[0].id, coupon_code).then((order) => {                     
+                    order_id = order.id
+                    order_key = order.order_key
                 })
             });
         })
 
         after('TearDown / Clean up', () => {
-            ordersRequests.deleteOrder(orderId);
-            couponRequests.deleteCoupon(couponId);
+            ordersRequests.deleteOrder(order_id);
+            couponRequests.deleteCoupon(coupon_id);
             
         })        
 
         it('UI Testing - Verify the order shows the proper discount value', () => {
             let discount;
-            cy.visit(`checkout/order-received/${orderId}/?key=${orderKey}`);            
-            discount = parseFloat((couponPercentaje/100) * parseFloat(productPrice) ).toFixed(2);
+            cy.visit(`checkout/order-received/${order_id}/?key=${order_key}`);            
+            discount = parseFloat((coupon_percentaje/100) * parseFloat(product_price) ).toFixed(2);
             cy.get(":nth-child(2) > td > .woocommerce-Price-amount").should('be.visible').last().invoke('text').should('contain',(`$${discount}`));  
         })
 
