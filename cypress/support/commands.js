@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('createCoupon', (code) => {
+Cypress.Commands.add('createCoupon', (code, percentaje) => {
     cy.request({
             method: 'POST',
             url: Cypress.config("baseUrl") + Cypress.config("coupon_url"),
@@ -35,7 +35,7 @@ Cypress.Commands.add('createCoupon', (code) => {
             body: {
                 code: code,
                 discount_type: "percent",
-                amount: "25",
+                amount: percentaje,
                 description: "Cupon used on final project - Jose Garcia",
             },
         })
@@ -69,7 +69,7 @@ Cypress.Commands.add('deleteCoupon', (couponId) => {
                     password: Cypress.env("api_password")
                 },
                 body: {
-                    force: true
+                    force: "true"
                 },
             })
             .then((resp) => {
@@ -121,6 +121,7 @@ Cypress.Commands.add('createOrder', (productId,couponCode) => {
                 password: Cypress.env("api_password")
             },
             body: {
+                customer_id:"1",
                 payment_method: "bacs",
                 payment_method_title: "Direct Bank Transfer",
                 set_paid: true,
@@ -148,7 +149,7 @@ Cypress.Commands.add('createOrder', (productId,couponCode) => {
                 },
                 line_items: [{
                     product_id: productId,
-                    quantity: 2
+                    quantity: 1
                 }],
                 coupon_lines: [{
                     code: couponCode
@@ -169,12 +170,15 @@ Cypress.Commands.add('createOrder', (productId,couponCode) => {
 
 Cypress.Commands.add('deleteOrder', (orderId) => {
     cy.request({
-            method: 'POST',
+            method: 'DELETE',
             url: Cypress.config("baseUrl") + Cypress.config("orders_url")+`/${orderId}`,
             auth: {
                 username: Cypress.env("api_username"),
                 password: Cypress.env("api_password")
-            },              
+            }, 
+            body: {
+                force: "true"
+            },             
         })
         .then((resp) => {
             expect(resp.status).eq(200)
