@@ -2,13 +2,30 @@
 
 # UI Cypress Automation Challenge
 
-This project tests the application `Testing Playground` and adds the test `place-order.spec.js`that has the objective of testing the completion of an order.
-The process to complete an order involves:
+This project tests the application `Testing Playground` as the Final project for GAP's Internal QA Automation Bootcamp. The following description was the main goal of the project.
 
-1. Searching for a product
-2. Adding the product to the cart
-3. Filling out the form for the Shipping and Billing information
-4. Processing the order
+# Setup:
+
+- Create a new coupon
+- Create an order using a product and the recent created coupon
+
+# Integration Tests:
+
+- Verify that a specific product can be requested (API Test)
+  - **Note:** To have a reliable test that did not depend on the existence of a specific product then a new product was created via API.
+- Verify that a specific coupon can be requested (API Test)
+- Verify that the order shows the proper discount value (UI Test)
+  - **Note:** In order to have a reliable test and since a product, coupon and order were created as part of the setup then the validation made did not involve dynamic calculatioins since we already know the values that should be returned.
+
+**NOTE:** For those 3 tests above, please make sure to use the coupon, and order that were created as part of the setup steps.
+
+# Teardown / Cleanup:
+
+- Remove coupon
+- Remove order
+- Remove Product
+
+**NOTE:** Clean up the objects that were created during the setup stage.
 
 ## Getting Started
 
@@ -29,9 +46,8 @@ on Mac:
 ## Running the tests
 
 1. Using the terminal navigate to the folder you created to clone the repository
-   - To open Cypress' GUI run `npx cypress open` Then you will have the ability to pick the tests to run (`place-order.spec.js`)
+   - To open Cypress' GUI run `npx cypress open` Then you will have the ability to pick the tests to run (`order-w-coupon.spec.js`)
 
-## Available Tests to Execute
+# API Tests
 
-- `place-order.spec.js`
-- `remove-from-cart.spec.js`
+The API tests were designed following [woocommerce's documentation](https://woocommerce.github.io/woocommerce-rest-api-docs/#) for its REST API
