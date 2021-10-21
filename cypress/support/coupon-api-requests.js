@@ -57,9 +57,10 @@ class CouponAPIRequests {
                     password: Cypress.env("api_password")
                 }
             }).then( (response) => {
+                cy.wrap(response.status).as('couponStatusCode');
+                
                 cy.log(`Status code: ${response.status}`); 
                 cy.log(`Coupon ID: ${response.body.id}`);
-                cy.wrap(response.status).as('couponStatusCode');
             })
         });
     }

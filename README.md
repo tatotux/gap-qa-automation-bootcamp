@@ -35,3 +35,8 @@ Using an API automation framework/tool of your preference, please automate the f
 
 **API Documentation**:
 https://woocommerce.github.io/woocommerce-rest-api-docs/
+
+
+## Additional notes
+
+* API authentication was implemented with environment variables. You should set your credentials in your local `cypress.env.json` file. 

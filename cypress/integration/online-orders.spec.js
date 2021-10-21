@@ -10,10 +10,8 @@ describe ('Online orders', () => {
 
     let couponId;
     let couponCode
-    let couponStatusCode;
 
     let productId;
-    let productStatusCode;
 
     let orderId;
     let orderKey;
@@ -22,6 +20,7 @@ describe ('Online orders', () => {
     beforeEach('Create coupon, product and order for tests', () => {
 
         //  COUPON
+        cy.log(" ===============================    COUPON   ==========================");
         CouponRequests.create();
         cy.get('@couponId').then(val => {
             couponId = val;          
@@ -31,6 +30,7 @@ describe ('Online orders', () => {
         })
     
         //  PRODUCT 
+        cy.log(" ===============================    PRODUCT   ==========================");
         ProductRequests.create();
         cy.get('@productId').then(val => {
             productId = val;          
@@ -61,14 +61,14 @@ describe ('Online orders', () => {
     it('should request coupon', () => {
 
         CouponRequests.get();
-        cy.get('@couponStatusCode').should('eq', '200');
+        cy.get('@couponStatusCode').should('eq', 200);
     
     });
 
     it('should request product', () => {
 
         ProductRequests.get();
-        cy.get('@productStatusCode').should('eq', '200');
+        cy.get('@productStatusCode').should('eq', 200);
     
     });
 

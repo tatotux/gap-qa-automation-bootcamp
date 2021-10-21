@@ -57,9 +57,9 @@ class ProductAPIRequests {
                     password: Cypress.env("api_password")
                 }
             }).then( (response) => {
+                cy.wrap(response.status).as('productStatusCode');
                 cy.log(`Status code: ${response.status}`); 
                 cy.log(`Product ID: ${response.body.id}`);  
-                cy.wrap(response.status).as('productStatusCode');
             })
         });
     }
