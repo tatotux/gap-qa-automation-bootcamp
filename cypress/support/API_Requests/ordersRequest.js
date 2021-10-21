@@ -20,7 +20,7 @@ export const createOrder = (productId,couponCode) => {
                     state: "CA",
                     postcode: "94103",
                     country: "US",
-                    email: "john.doe@example.com",
+                    email: `jgarcia${Date.now()}@gmail.com`,
                     phone: "(555) 555-5555"
                 },
                 shipping: {
@@ -50,7 +50,7 @@ export const createOrder = (productId,couponCode) => {
         })
         .then((resp) => {
             expect(resp.status).eq(201)
-            return resp.body.id
+            return resp.body
         })
 };
 

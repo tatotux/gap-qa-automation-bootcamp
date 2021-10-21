@@ -36,17 +36,17 @@ export const getCoupon = (couponId) => {
 
 export const deleteCoupon = (couponId) => {
     cy.request({
-            method: 'DELETE',
-            url: Cypress.config("baseUrl") + Cypress.config("coupon_url") + `/${couponId}`,
-            auth: {
-                username: Cypress.env("api_username"),
-                password: Cypress.env("api_password")
-            },
-            body: {
-                force: "true"
-            },
-        })
-        .then((resp) => {
-            expect(resp.status).eq(200)
-        })
+        method: 'DELETE',
+        url: Cypress.config("baseUrl") + Cypress.config("coupon_url") + `/${couponId}`,
+        auth: {
+            username: Cypress.env("api_username"),
+            password: Cypress.env("api_password")
+        },
+        body: {
+            force: "true"
+        },
+    })
+    .then((resp) => {
+        expect(resp.status).eq(200)
+    })
 }

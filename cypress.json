@@ -3,6 +3,7 @@
     "coupon_url": "wp-json/wc/v3/coupons",
     "orders_url": "wp-json/wc/v3/orders",
     "products_url": "wp-json/wc/v3/products",
+    
     "env": {
         "api_username": "automation",
         "api_password": "automation"

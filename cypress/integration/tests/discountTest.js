@@ -12,6 +12,7 @@ context('Testing Playground', () => {
         let couponId;
         let productsList;
         let orderId;
+        let orderKey;
         let productPrice;
 
         before('Set Up', () => {
@@ -19,7 +20,10 @@ context('Testing Playground', () => {
             couponRequests.createCoupon(couponCode, couponPercentaje.toString()).then((id) => {
                 couponId = id;
                 productPrice = productsList[0].regular_price;
-                ordersRequests.createOrder(productsList[0].id, couponCode).then((order) => { orderId = order })
+                ordersRequests.createOrder(productsList[0].id, couponCode).then((order) => {                     
+                    orderId = order.id
+                    orderKey = order.order_key
+                })
             });
         })
 
@@ -27,31 +31,11 @@ context('Testing Playground', () => {
             ordersRequests.deleteOrder(orderId);
             couponRequests.deleteCoupon(couponId);
             
-        })
-
-        it('API - A specific product can be requested', () => {
-            //PLEASE REMOVE 'productsList[0].id' in case you want to use a specific product id already existing on DB         
-            productsRequests.getProduct(productsList[0].id).then((productInfo) => {
-                expect(productInfo).not.empty;
-                expect(productInfo.id).eq(productsList[0].id);
-            });
-        })
-
-        it('API - A specific coupon can be requested', () => {
-            couponRequests.getCoupon(couponId).then((coupon) => {
-                expect(coupon.id).eq(couponId);
-                expect(coupon.code).eq(couponCode.toLowerCase());
-                expect(coupon.amount).eq("25.00");
-                expect(coupon.description).eq("Cupon used on final project - Jose Garcia");
-            });
-        })
+        })        
 
         it('UI Testing - Verify the order shows the proper discount value', () => {
             let discount;
-            cy.visit(`my-account/view-order/${orderId}`);
-            cy.get("#username").should('be.visible').type(Cypress.env("api_username"));
-            cy.get("#password").should('be.visible').type(Cypress.env("api_password"));
-            cy.get("[name=login]").should('be.visible').click();
+            cy.visit(`checkout/order-received/${orderId}/?key=${orderKey}`);            
             discount = parseFloat((couponPercentaje/100) * parseFloat(productPrice) ).toFixed(2);
             cy.get(":nth-child(2) > td > .woocommerce-Price-amount").should('be.visible').last().invoke('text').should('contain',(`$${discount}`));  
         })
