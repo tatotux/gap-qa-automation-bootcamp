@@ -1,0 +1,7 @@
+{
+    "codeName" : "aparraCoupOff",
+    "amount" : "20",
+    "minAmount" : "10.00",
+    "couponAlias": "couponId",
+    "couponStatus":"couponStatus"
+}
