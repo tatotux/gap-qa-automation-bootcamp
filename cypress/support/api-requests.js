@@ -25,14 +25,14 @@ class ApiRequest {
     deleteCoupon(couponId) {
         cy.request({
             method: 'DELETE',
-            url: `/wp-json/wc/v3/coupons/${couponId}`,
+            url: `/wp-json/wc/v3/coupons/${couponId}?force=true`,
             auth: {
                 user: Cypress.env('ECOMMERCE_USER'),
                 pass: Cypress.env('ECOMMERCE_PASS')
             },
-            body: {
-                force: true
-            },
+            //body: {
+              //  force: true
+            //},
         })
         .then((resp) => {
             expect(resp.status).eq(200)
@@ -63,6 +63,7 @@ class ApiRequest {
                 payment_method: "cdr",
                 payment_method_title: "Credit Card",
                 set_paid: true,
+                customer_id: 188,
                 billing: {
                     first_name: "Alex",
                     last_name: "Esquivel",
@@ -113,14 +114,14 @@ class ApiRequest {
     deleteOrder(orderId) {
         cy.request({
             method: 'DELETE',
-            url: `/wp-json/wc/v3/orders/${orderId}`,
+            url: `/wp-json/wc/v3/orders/${orderId}?force=true`,
             auth: {
                 user: Cypress.env('ECOMMERCE_USER'),
                 pass: Cypress.env('ECOMMERCE_PASS')
             },
-            body: {
-                force: true
-            },
+            //body: {
+              //  force: true
+            //},
         })
         .then((resp) => {
             expect(resp.status).eq(200)

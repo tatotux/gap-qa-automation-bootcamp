@@ -1,7 +1,8 @@
 /// <reference types="cypress" />
 
-// import { id } from 'common-tags';
 import { APIRequest } from '../support/api-requests';
+import { Login } from '../page-objects/pages/login';
+import { OrderPage} from '../page-objects/pages/order-detail';
 
 describe('Product Coupons', () => {
 
@@ -37,6 +38,7 @@ describe('Product Coupons', () => {
     });
 
     it('should show proper discount value for an order', () => {
-
+        Login.login(orderId);
+        OrderPage.checkDiscount();
     });
 });

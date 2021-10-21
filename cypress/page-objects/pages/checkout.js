@@ -11,7 +11,7 @@ class CheckoutDetailPage {
         shippingAddressCheckbox: () => cy.get('#ship-to-different-address-checkbox'),
         termsCheckbox: () => cy.get('#terms'),
         placeOrder: () => cy.get('#place_order'),
-    };    
+    };
 
     fllForm() {
       this.elements.firstName().type('Alex');
@@ -20,9 +20,9 @@ class CheckoutDetailPage {
       this.elements.town().type('Perez Zeledón');
       this.elements.postcode().type('20193');
       this.elements.phone().type('55558741');
-      this.elements.email().type('alexeg2@bootcamp.com');
+      this.elements.email().type('alexeg3@bootcamp.com');
       this.elements.shippingAddressCheckbox().click();
-      this.elements.termsCheckbox().click();      
+      this.elements.termsCheckbox().click();
     }
 }
 
